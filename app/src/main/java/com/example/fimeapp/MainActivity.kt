@@ -72,19 +72,6 @@ class MainActivity : AppCompatActivity() {
             cursor?.close()
         }
 
-        // You can now interact with the database
-
-        // For example, query the data
-//        val cursor: Cursor = db.rawQuery("SELECT * FROM sqlite_master WHERE type='table'", null)
-//        while (cursor.moveToNext()) {
-//            val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-//            val email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
-//            Log.d("DB", "Name: $name, Email: $email")
-//        }
-//        cursor.close()
-
-
-
     }
 
 

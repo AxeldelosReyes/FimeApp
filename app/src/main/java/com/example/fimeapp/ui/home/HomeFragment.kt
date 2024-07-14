@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.fimeapp.R
 import com.example.fimeapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -32,7 +34,16 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+
+        setupLogin()
+
         return root
+    }
+
+    private fun setupLogin(){
+        binding.btnLogin.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_home_to_temario)
+        }
     }
 
     override fun onDestroyView() {

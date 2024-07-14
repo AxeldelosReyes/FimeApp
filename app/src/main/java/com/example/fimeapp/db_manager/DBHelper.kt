@@ -1,6 +1,7 @@
 package com.example.fimeapp.db_manager
 
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.io.FileOutputStream
@@ -71,5 +72,33 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
             copyDatabase()
         }
 
+    }
+
+    fun read(tableName: String, columns: Array<String>): List<Map<String, Any?>> {
+        val db = this.readableDatabase
+        val cursor: Cursor = db.query(tableName, columns, null, null, null, null, null)
+        val results = mutableListOf<Map<String, Any?>>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val row = mutableMapOf<String, Any?>()
+                for (column in columns) {
+                    val index = cursor.getColumnIndex(column)
+                    if (index != -1) {
+                        row[column] = when (cursor.getType(index)) {
+                            Cursor.FIELD_TYPE_INTEGER -> cursor.getInt(index)
+                            Cursor.FIELD_TYPE_FLOAT -> cursor.getFloat(index)
+                            Cursor.FIELD_TYPE_STRING -> cursor.getString(index)
+                            Cursor.FIELD_TYPE_BLOB -> cursor.getBlob(index)
+                            Cursor.FIELD_TYPE_NULL -> null
+                            else -> null
+                        }
+                    }
+                }
+                results.add(row)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return results
     }
 }
