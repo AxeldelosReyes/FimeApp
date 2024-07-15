@@ -48,12 +48,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        loginBtn.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            // Start the Activity
-            startActivity(intent)
+//        loginBtn.setOnClickListener {
+//            val intent = Intent(this, Home::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            // Start the Activity
+//            startActivity(intent)
+//
+//        }
 
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         test.setOnClickListener {
