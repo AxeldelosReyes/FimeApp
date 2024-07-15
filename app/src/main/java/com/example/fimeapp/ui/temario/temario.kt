@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
@@ -23,8 +24,7 @@ class temario : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TemarioAdapter
     private lateinit var items: List<MyItem>
-
-
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class temario : Fragment() {
         val view = inflater.inflate(R.layout.fragment_temario, container, false)
         // Set up the RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
-
+        searchView = view.findViewById(R.id.searchView)
 
         return view
     }
@@ -69,6 +69,21 @@ class temario : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = TemarioAdapter(requireContext(), items)
         recyclerView.adapter = adapter
+
+
+        // Set up the SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
+
     }
 
 
