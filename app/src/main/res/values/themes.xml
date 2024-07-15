@@ -3,6 +3,15 @@
     <style name="Base.Theme.FimeApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="buttonStyle">@style/GreenButton</item>
+    </style>
+
+    <style name="GreenButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/button_green</item>
+    </style>
+    <style name="CustomAlertDialogTitle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:textColor">#B3261E</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="Theme.FimeApp" parent="Base.Theme.FimeApp" />

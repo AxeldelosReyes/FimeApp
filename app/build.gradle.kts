@@ -60,5 +60,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebaseAuth)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.material.v140)
 
 }

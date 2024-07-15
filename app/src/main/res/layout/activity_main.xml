@@ -8,13 +8,17 @@
     tools:context=".MainActivity">
 
 
-
+    <Button
+        android:id="@+id/cerrarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cerrar sesion"
+        />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="128dp"
         android:layout_height="69dp"
-
         android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
