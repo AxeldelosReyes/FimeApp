@@ -24,6 +24,23 @@
         android:id="@+id/temario"
         android:name="com.example.fimeapp.ui.temario.temario"
         android:label="fragment_temario"
-        tools:layout="@layout/fragment_temario" />
+        tools:layout="@layout/fragment_temario" >
+        <action
+            android:id="@+id/action_temario_to_material"
+            app:destination="@id/material" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/material"
+        android:name="com.example.fimeapp.ui.material.material"
+        android:label="fragment_material"
+        tools:layout="@layout/fragment_material">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

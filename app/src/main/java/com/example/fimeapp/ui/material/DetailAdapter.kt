@@ -1,4 +1,4 @@
-package com.example.fimeapp.ui.temario
+package com.example.fimeapp.ui.material
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,27 +10,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 
-data class MyItem(
+data class DetailItem(
     val title: String,
     val description: String,
     val image: ByteArray
 )
 
 
-class TemarioAdapter (
+class DetailAdapter (
     private val context: Context,
-    private val items: List<MyItem>,
-    private val itemClickListener: (MyItem) -> Unit
-    ) : RecyclerView.Adapter<TemarioAdapter.ViewHolder>(), Filterable {
+    private val items: List<DetailItem>,
+    private val itemClickListener: (DetailItem) -> Unit
+    ) : RecyclerView.Adapter<DetailAdapter.ViewHolder>(), Filterable {
 
-        private var itemsFiltered: List<MyItem> = items
+        private var itemsFiltered: List<DetailItem> = items
 
         // ViewHolder class to hold item views
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
 
-            fun bind(item: MyItem) {
+            fun bind(item: DetailItem) {
                 textViewTitle.text = item.title
                 textViewDescription.text = item.description
                 itemView.setOnClickListener { itemClickListener(item) }
@@ -74,7 +74,7 @@ class TemarioAdapter (
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
-                itemsFiltered = filterResults?.values as List<MyItem>
+                itemsFiltered = filterResults?.values as List<DetailItem>
                 notifyDataSetChanged()
             }
         }

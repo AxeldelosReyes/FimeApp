@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
@@ -67,7 +68,15 @@ class temario : Fragment() {
 
         // Set up the RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = TemarioAdapter(requireContext(), items)
+
+        adapter = TemarioAdapter(requireContext(), items){ item ->
+            val bundle = Bundle().apply {
+                putString("title", item.title)
+                putString("description", item.description)
+            }
+            findNavController().navigate(R.id.action_temario_to_material, bundle)
+        }
+
         recyclerView.adapter = adapter
 
 
