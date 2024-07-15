@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_back"
         android:icon="@drawable/ic_back_btn_black_24dp"
-        android:title="@string/title_home" />
+        android:title="back" />
 
 
     <item
