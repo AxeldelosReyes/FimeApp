@@ -19,6 +19,9 @@ import com.example.fimeapp.db_manager.DBHelper
 
 
 class MainActivity : AppCompatActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
