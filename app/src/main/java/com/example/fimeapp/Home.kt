@@ -5,11 +5,13 @@ import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fimeapp.databinding.ActivityHomeBinding
+import com.google.android.material.navigation.NavigationBarView
 
 class Home : AppCompatActivity() {
 
@@ -30,11 +32,51 @@ class Home : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard
-            )
+            topLevelDestinationIds = setOf(
+                R.id.navigation_back, R.id.navigation_home, R.id.navigation_dashboard
+            ),
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        // Handle navigation item selection
+
+        navView.menu.findItem(R.id.navigation_back).setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.navigation_back -> {
+                    if (!navController.popBackStack()) {
+//                        finish() // If there's no fragment to go back to, close the activity
+                    }
+                }
+            }
+            true
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+
+            navView.menu.findItem(R.id.navigation_back).isVisible = false
+
+            when (destination.id) {
+                R.id.navigation_home -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+                R.id.navigation_dashboard -> navView.menu.findItem(R.id.navigation_dashboard).isChecked = true
+                R.id.navigation_back -> {navController.popBackStack()
+
+                }
+                else -> {
+                    navView.menu.findItem(R.id.navigation_home).isChecked = true
+                    navView.menu.findItem(R.id.navigation_back).isVisible = true
+
+                }
+            }
+        }
+
+
+
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_home)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+
 }

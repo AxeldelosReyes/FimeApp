@@ -12,14 +12,15 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_temario"
-            app:destination="@id/temario" />
+            app:destination="@id/temario"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.fimeapp.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard"/>
     <fragment
         android:id="@+id/temario"
         android:name="com.example.fimeapp.ui.temario.temario"
@@ -27,7 +28,8 @@
         tools:layout="@layout/fragment_temario" >
         <action
             android:id="@+id/action_temario_to_material"
-            app:destination="@id/material" />
+            app:destination="@id/material"
+            app:popUpTo="@id/temario" />
     </fragment>
 
     <fragment
