@@ -4,6 +4,9 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
-                            showErrorDialog("La autenticación falló. Por favor, verifica tu correo y contraseña.")
+                            showErrorDialog("Usuario capturado no existe. Favor de revisar en su dependencia..")
                         }
                     }
             }
@@ -70,14 +73,19 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showErrorDialog(message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Acceso Denegado")
+
+        val titleView = TextView(this).apply {
+            text = "Acceso Denegado"
+            setTextAppearance(R.style.CustomAlertDialogTitle)
+            setPadding(16, 16, 16, 16)
+            gravity = Gravity.CENTER
+        }
+
+        builder.setCustomTitle(titleView)
         builder.setMessage(message)
         builder.setPositiveButton("Aceptar", null)
         val dialog = builder.create()
         dialog.show()
     }
 
-    companion object {
-        private const val TAG = "LoginActivity"
-    }
 }
