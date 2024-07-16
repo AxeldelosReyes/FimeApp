@@ -13,7 +13,7 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
 
     companion object {
         private const val DATABASE_NAME = "mydatabase.db"
-        private const val DATABASE_VERSION = 15
+        private const val DATABASE_VERSION = 21
     }
 
     private val dbPath: String = context.getDatabasePath(DATABASE_NAME).path
