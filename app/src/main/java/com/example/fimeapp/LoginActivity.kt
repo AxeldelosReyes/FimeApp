@@ -55,10 +55,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.move.setOnClickListener {
-            val intent = Intent(this, SingupActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.move.setOnClickListener {
+//            val intent = Intent(this, SingupActivity::class.java)
+//            startActivity(intent)
+//        }
         binding.skip.setOnClickListener {
             val intent = Intent(this, Home::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
