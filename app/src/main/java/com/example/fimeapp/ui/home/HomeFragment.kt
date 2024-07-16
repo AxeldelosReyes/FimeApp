@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
                 else if (position == 0) {
                     resetSpinner(binding.spinnerMateria)
                 } else {
-                 update_materia_items()
+                    update_materia_items()
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
