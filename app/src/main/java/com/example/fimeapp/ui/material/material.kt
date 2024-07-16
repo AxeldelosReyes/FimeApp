@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,10 @@ import com.example.fimeapp.ui.temario.MyItem
 import com.rajat.pdfviewer.PdfViewerActivity
 import com.rajat.pdfviewer.util.saveTo
 
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
+
 
 class material : Fragment() {
 
@@ -24,6 +29,17 @@ class material : Fragment() {
     private lateinit var adapter: DetailAdapter
     private lateinit var items: List<DetailItem>
     private lateinit var searchView: SearchView
+
+    private var current_user: FirebaseUser? = null
+    private var temario_id = 0
+    private var plan_id = 0
+    private var materia_id = 0
+    private var academia_id = 0
+
+    private var plan_name = ""
+    private var materia_name= ""
+    private var academia_name = ""
+
 
     companion object {
         fun newInstance() = material()
@@ -36,8 +52,16 @@ class material : Fragment() {
 
         databaseHelper = DBHelper(requireContext())
 
+        current_user = Firebase.auth.currentUser
 
-        val temario_id = requireArguments().getInt("temario")
+        temario_id = requireArguments().getInt("temario")
+        plan_id = requireArguments().getInt("plan")
+        materia_id = requireArguments().getInt("materia")
+        academia_id = requireArguments().getInt("academia")
+
+        plan_name = databaseHelper.readName("study_plan", "name","id", plan_id.toString()) ?: ""
+        materia_name = databaseHelper.readName("materias", "name","id", materia_id.toString()) ?: ""
+        academia_name = databaseHelper.readName("academias", "name","id", academia_id.toString()) ?: ""
 
 
         // Read data from the table
@@ -58,39 +82,52 @@ class material : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val plan_text = view.findViewById<TextView>(R.id.textViewPlan)
+        val materia_text = view.findViewById<TextView>(R.id.textViewMateria)
+        val academia_text = view.findViewById<TextView>(R.id.textViewAcademia)
+
+        plan_text.text = plan_name
+        materia_text.text = materia_name
+        academia_text.text = academia_name
+
+
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = DetailAdapter(requireContext(), items){ item ->
-             findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
-//                if (item.tipo == "pdf"){
-//                if (item.external_link.isNotEmpty()){
-//                    startActivity(
-//                        PdfViewerActivity.launchPdfFromUrl(
-//                            context = this.context, pdfUrl = item.external_link,
-//                            pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
-//                            enableDownload = true))
-//                }
-//                else if (item.uri.isNotEmpty()){
-//                    startActivity(
-//                    PdfViewerActivity.launchPdfFromPath(
-//                        context = this.context,
-//                        path = item.uri,
-//                        pdfTitle = item.name,
-//                        saveTo = saveTo.ASK_EVERYTIME,
-//                        fromAssets = false
-//                    ))
-//                }
-//                else{
-//                    startActivity(
-//                    PdfViewerActivity.launchPdfFromPath(
-//                        context = this.context,
-//                        path = item.asset,
-//                        pdfTitle = item.name,
-//                        saveTo = saveTo.ASK_EVERYTIME,
-//                        fromAssets = true
-//                    ))
-//                }
-//            }
+                if (item.tipo == "pdf"){
+                if (item.external_link.isNotEmpty()){
+                    startActivity(
+                        PdfViewerActivity.launchPdfFromUrl(
+                            context = this.context, pdfUrl = item.external_link,
+                            pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
+                            enableDownload = true))
+                }
+                else if (item.uri.isNotEmpty()){
+                    startActivity(
+                    PdfViewerActivity.launchPdfFromPath(
+                        context = this.context,
+                        path = item.uri,
+                        pdfTitle = item.name,
+                        saveTo = saveTo.ASK_EVERYTIME,
+                        fromAssets = false
+                    ))
+                }
+                else{
+                    startActivity(
+                    PdfViewerActivity.launchPdfFromPath(
+                        context = this.context,
+                        path = item.asset,
+                        pdfTitle = item.name,
+                        saveTo = saveTo.ASK_EVERYTIME,
+                        fromAssets = true
+                    ))
+                }
+            }
+                else if (item.tipo == "video"){
+                    findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
 
+                }
 
         }
         recyclerView.adapter = adapter

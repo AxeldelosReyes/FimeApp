@@ -65,32 +65,6 @@ class MainActivity : AppCompatActivity() {
             test.text = "Clicked"
 
         }
-        Log.e("DB", "test")
-        setup()
-
-    }
-
-    private fun setup() {
-        val dbHelper = DBHelper(this)
-        val db = dbHelper.writableDatabase
-
-        // Safely query the database
-        var cursor: Cursor? = null
-        Log.d("DB", "TEST")
-        try {
-            cursor = db.rawQuery("SELECT * FROM study_plan", null)
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
-                    val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-                    Log.d("DB", "id: $id, Email: $name")
-                }
-            }
-        } catch (e: SQLException) {
-            Log.e("DB", "Query failed", e)
-        } finally {
-            cursor?.close()
-        }
 
     }
 

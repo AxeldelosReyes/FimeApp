@@ -15,7 +15,11 @@
             app:destination="@id/temario"
             app:popUpTo="@id/navigation_home" />
     </fragment>
-
+    <fragment
+        android:id="@+id/navigation_favoritos"
+        android:name="com.example.fimeapp.ui.favoritos.favoritos"
+        android:label="Favoritos"
+        tools:layout="@layout/fragment_favoritos"/>
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.fimeapp.ui.dashboard.DashboardFragment"

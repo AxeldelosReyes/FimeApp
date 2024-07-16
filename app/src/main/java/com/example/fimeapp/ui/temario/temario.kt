@@ -7,12 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.db_manager.DBHelper
 import com.example.fimeapp.ui.home.SpinnerItem
+
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+
 
 class temario : Fragment() {
 
@@ -27,13 +33,20 @@ class temario : Fragment() {
     private lateinit var adapter: TemarioAdapter
     private lateinit var items: List<MyItem>
     private lateinit var searchView: SearchView
-
     private var plan_id = 0
     private var materia_id = 0
     private var academia_id = 0
 
+
+    private var plan_name = ""
+    private var materia_name= ""
+    private var academia_name = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
 
         databaseHelper = DBHelper(requireContext())
 
@@ -42,7 +55,9 @@ class temario : Fragment() {
         materia_id = requireArguments().getInt("materia")
         academia_id = requireArguments().getInt("academia")
 
-
+        plan_name = databaseHelper.readName("study_plan", "name","id", plan_id.toString()) ?: ""
+        materia_name = databaseHelper.readName("materias", "name","id", materia_id.toString()) ?: ""
+        academia_name = databaseHelper.readName("academias", "name","id", academia_id.toString()) ?: ""
 
         // Read data from the table
         items = databaseHelper.read("temario", arrayOf("id",
@@ -65,6 +80,17 @@ class temario : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         searchView = view.findViewById(R.id.searchView)
 
+        val plan_text = view.findViewById<TextView>(R.id.textViewPlan)
+        val materia_text = view.findViewById<TextView>(R.id.textViewMateria)
+        val academia_text = view.findViewById<TextView>(R.id.textViewAcademia)
+
+        plan_text.text = plan_name
+        materia_text.text = materia_name
+        academia_text.text = academia_name
+
+
+
+
         return view
     }
 
@@ -84,6 +110,9 @@ class temario : Fragment() {
         adapter = TemarioAdapter(requireContext(), items){ item ->
             val bundle = Bundle().apply {
                 putInt("temario", item.id)
+                putInt("plan", plan_id)
+                putInt("materia", materia_id)
+                putInt("academia", academia_id)
             }
             findNavController().navigate(R.id.action_temario_to_material, bundle)
         }

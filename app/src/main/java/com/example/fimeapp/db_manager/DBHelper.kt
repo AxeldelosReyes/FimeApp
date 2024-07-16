@@ -13,7 +13,7 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
 
     companion object {
         private const val DATABASE_NAME = "mydatabase.db"
-        private const val DATABASE_VERSION = 14
+        private const val DATABASE_VERSION = 15
     }
 
     private val dbPath: String = context.getDatabasePath(DATABASE_NAME).path
@@ -103,5 +103,25 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
 
         return results
     }
+
+    fun readName(tableName: String, nameColumn: String, idColumn: String, id: String): String? {
+        val db = this.readableDatabase
+        val selection = "$idColumn = ?"
+        val selectionArgs = arrayOf(id)
+        val columns = arrayOf(nameColumn)
+        var name: String? = null
+
+        val cursor: Cursor = db.query(tableName, columns, selection, selectionArgs, null, null, null)
+
+        cursor.use { // Use 'use' to automatically close the cursor
+            if (cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndexOrThrow(nameColumn))
+            }
+        }
+
+        return name
+    }
+
+
 
 }

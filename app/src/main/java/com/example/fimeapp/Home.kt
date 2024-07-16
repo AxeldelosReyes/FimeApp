@@ -39,7 +39,7 @@ class Home : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
-                R.id.navigation_back, R.id.navigation_home, R.id.navigation_dashboard
+                R.id.navigation_back, R.id.navigation_home, R.id.navigation_favoritos, R.id.navigation_dashboard
             ),
         )
 
@@ -60,24 +60,37 @@ class Home : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
-            navView.menu.findItem(R.id.navigation_back).isVisible = false
+            navView.menu.findItem(R.id.navigation_back).setEnabled(true)
 
             when (destination.id) {
-                R.id.navigation_home -> navView.menu.findItem(R.id.navigation_home).isChecked = true
-                R.id.navigation_dashboard -> navView.menu.findItem(R.id.navigation_dashboard).isChecked = true
-                R.id.navigation_back -> {navController.popBackStack()
+                R.id.navigation_home -> {
+                    navView.menu.findItem(R.id.navigation_back).setEnabled(false)
+//                    navView.menu.findItem(R.id.navigation_home).isChecked = true
+//                    navView.menu.findItem(R.id.navigation_back).isVisible = false
+                }
+                R.id.navigation_dashboard -> {
+//                    navView.menu.findItem(R.id.navigation_dashboard).isChecked = true
+//                    navView.menu.findItem(R.id.navigation_back).isVisible = false
+                }
+                R.id.navigation_favoritos -> {
+//                    navView.menu.findItem(R.id.navigation_favoritos).isChecked = true
+//                    navView.menu.findItem(R.id.navigation_back).isVisible = false
+                }
+//                R.id.navigation_back -> {navController.popBackStack()
 
                 }
-                else -> {
-                    navView.menu.findItem(R.id.navigation_home).isChecked = true
-                    navView.menu.findItem(R.id.navigation_back).isVisible = true
-
-                }
-            }
-        }
+//                else -> {
+//                    navView.menu.findItem(R.id.navigation_back).isVisible = true
+//                    navView.menu.findItem(R.id.navigation_home).isChecked = true
 
 
+//                }
+//            }
+//        }
 
+
+
+    }
     }
 
     override fun onSupportNavigateUp(): Boolean {
