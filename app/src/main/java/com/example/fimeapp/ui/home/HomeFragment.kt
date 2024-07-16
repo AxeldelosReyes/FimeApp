@@ -74,11 +74,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setSpinners() {
-        val plans = listOf( SpinnerItem(id=0, name="Plan de estudios")) + databaseHelper.read("study_plan", arrayOf("id", "name")).map { SpinnerItem(it["id"] as Int, it["name"] as String) }
+        val plans = listOf( SpinnerItem(id=0, name="Plan de estudios")) + databaseHelper.read("study_plan", arrayOf("id", "name"), orderBy ="name").map { SpinnerItem(it["id"] as Int, it["name"] as String) }
         val planAdapter = CustomSpinnerAdapter(requireContext(),plans, R.drawable.ic_calendar_btn_black_24dp)
         planAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        val academias = DEFAULT_ACADEMIA + databaseHelper.read("academias", arrayOf("id", "name")).map { SpinnerItem(it["id"] as Int, it["name"] as String) }
+        val academias = DEFAULT_ACADEMIA + databaseHelper.read("academias", arrayOf("id", "name"), orderBy ="name").map { SpinnerItem(it["id"] as Int, it["name"] as String) }
         val academiaAdapter = CustomSpinnerAdapter(requireContext(),academias, R.drawable.ic_building_btn_black_24dp)
         academiaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -139,7 +139,7 @@ class HomeFragment : Fragment() {
             cursor = db.rawQuery("select m.id,m.name from materias_academias_rel mar " +
                     "left join academias a on mar.academia_id = a.id " +
                     "left join materias m on mar.materia_id = m.id " +
-                    "where a.id = ? ", arrayOf(selectedAcademia.id.toString()))
+                    "where a.id = ? order by m.name", arrayOf(selectedAcademia.id.toString()))
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))

@@ -62,5 +62,6 @@ dependencies {
     implementation(libs.firebaseAuth)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.material.v140)
+    implementation(libs.pdf.viewer)
 
 }

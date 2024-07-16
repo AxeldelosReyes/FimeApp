@@ -13,7 +13,7 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
 
     companion object {
         private const val DATABASE_NAME = "mydatabase.db"
-        private const val DATABASE_VERSION = 13
+        private const val DATABASE_VERSION = 14
     }
 
     private val dbPath: String = context.getDatabasePath(DATABASE_NAME).path
@@ -74,7 +74,7 @@ class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABAS
 
     }
 
-    fun read(tableName: String, columns: Array<String>, selection: String? = null, selectionArgs: Array<String>? = null): List<Map<String, Any?>> {
+    fun read(tableName: String, columns: Array<String>, selection: String? = null, selectionArgs: Array<String>? = null, orderBy: String? = null): List<Map<String, Any?>>  {
         val db = this.readableDatabase
         val cursor: Cursor = db.query(tableName, columns, selection, selectionArgs, null, null, null)
         val results = mutableListOf<Map<String, Any?>>()

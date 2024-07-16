@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.db_manager.DBHelper
 import com.example.fimeapp.ui.temario.MyItem
+import com.rajat.pdfviewer.PdfViewerActivity
+import com.rajat.pdfviewer.util.saveTo
 
 
 class material : Fragment() {
@@ -40,7 +42,7 @@ class material : Fragment() {
 
         // Read data from the table
         items = databaseHelper.read("material", arrayOf("id",
-            "tipo","name","external_link","temario_id"),"temario_id= ?", arrayOf(temario_id.toString())).toMyItemList()
+            "tipo","name","external_link","temario_id","asset","uri"),"temario_id= ?", arrayOf(temario_id.toString()), orderBy ="name").toMyItemList()
 
     }
 
@@ -58,7 +60,37 @@ class material : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = DetailAdapter(requireContext(), items){ item ->
-            println("material:${item}")
+            if (item.tipo == "pdf"){
+                if (item.external_link.isNotEmpty()){
+                    startActivity(
+                        PdfViewerActivity.launchPdfFromUrl(
+                            context = this.context, pdfUrl = item.external_link,
+                            pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
+                            enableDownload = true))
+                }
+                else if (item.uri.isNotEmpty()){
+                    startActivity(
+                    PdfViewerActivity.launchPdfFromPath(
+                        context = this.context,
+                        path = item.uri,
+                        pdfTitle = item.name,
+                        saveTo = saveTo.ASK_EVERYTIME,
+                        fromAssets = false
+                    ))
+                }
+                else{
+                    startActivity(
+                    PdfViewerActivity.launchPdfFromPath(
+                        context = this.context,
+                        path = item.asset,
+                        pdfTitle = item.name,
+                        saveTo = saveTo.ASK_EVERYTIME,
+                        fromAssets = true
+                    ))
+                }
+            }
+
+
         }
         recyclerView.adapter = adapter
     }
@@ -70,6 +102,8 @@ class material : Fragment() {
                 name = map["name"] as String,
                 external_link = (map["external_link"] ?: "").toString(),
                 tipo = map["tipo"] as String,
+                uri = (map["uri"] ?: "").toString(),
+                asset = (map["asset"] ?: "").toString(),
                 temario_id = map["temario_id"] as Int,
             )
         }

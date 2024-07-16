@@ -19,6 +19,7 @@ navigationRuntimeKtx = "2.7.7"
 legacySupportV4 = "1.0.0"
 fragmentKtx = "1.8.1"
 firebaseAuthV= "23.0.0"
+pdfViewer = "latest-version"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", ve
 
 firebaseAuth = {group="com.google.firebase" , name="firebase-auth", version.ref="firebaseAuthV"}
 material-v140 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+pdf-viewer = { module = "io.github.afreakyelf:Pdf-Viewer", version = "2.1.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

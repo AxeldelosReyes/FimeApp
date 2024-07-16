@@ -15,6 +15,8 @@ data class DetailItem(
     val name: String,
     val temario_id: Int,
     val tipo: String,
+    val uri: String,
+    val asset: String,
     val external_link: String,
 )
 

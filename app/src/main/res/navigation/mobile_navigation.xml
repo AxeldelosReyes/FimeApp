@@ -49,6 +49,13 @@
         <argument
             android:name="temario"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_material_to_pdfview"
+            app:destination="@id/pdfview" />
     </fragment>
+    <fragment
+        android:id="@+id/pdfview"
+        android:name="com.example.fimeapp.ui.pdfviewer.pdfview"
+        android:label="pdfview" />
 
 </navigation>

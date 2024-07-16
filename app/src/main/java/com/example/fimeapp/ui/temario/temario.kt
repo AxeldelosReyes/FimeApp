@@ -46,7 +46,7 @@ class temario : Fragment() {
 
         // Read data from the table
         items = databaseHelper.read("temario", arrayOf("id",
-            "imagen","materia","titulo","descripcion"),"materia= ?", arrayOf(materia_id.toString())).toMyItemList()
+            "imagen","materia","titulo","descripcion"),"materia= ?", arrayOf(materia_id.toString()),orderBy ="titulo").toMyItemList()
         // Print results
         for (row in items) {
             println(row)
