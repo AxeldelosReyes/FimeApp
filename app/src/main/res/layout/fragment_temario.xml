@@ -99,7 +99,7 @@
                 android:text="Plan"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -128,7 +128,7 @@
                 android:text="Academia"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 tools:ignore="NotSibling" />
         </RelativeLayout>
 
@@ -154,11 +154,11 @@
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/iconPlan"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="45dp"
+                android:layout_marginStart="35dp"
                 android:text="Materia"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 tools:ignore="NotSibling" />
         </RelativeLayout>
 
