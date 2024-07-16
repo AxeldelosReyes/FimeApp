@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/fondo_letras_fime"
-        tools:layout_editor_absoluteX="-58dp"
-        tools:layout_editor_absoluteY="0dp" />
+         />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,7 +26,8 @@
             android:layout_marginLeft="55dp"
             android:scaleType="centerCrop"
             android:alpha="0.8"
-            android:src="@drawable/logo_uni_verde" />
+            android:src="@drawable/logo_uni_verde"
+            />
 
         <View
             android:layout_width="160dp"
@@ -62,7 +62,7 @@
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="200dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:background="@drawable/searchview_background"
