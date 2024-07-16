@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 
 data class DetailItem(
-    val title: String,
-    val description: String,
-    val image: ByteArray
+    val id: Int,
+    val name: String,
+    val temario_id: Int,
+    val tipo: String,
+    val external_link: String,
 )
 
 
@@ -27,19 +29,17 @@ class DetailAdapter (
 
         // ViewHolder class to hold item views
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
-            val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+            val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescriptionMaterial)
 
             fun bind(item: DetailItem) {
-                textViewTitle.text = item.title
-                textViewDescription.text = item.description
+                textViewDescription.text = item.name
                 itemView.setOnClickListener { itemClickListener(item) }
             }
         }
 
         // Inflate the item layout and create the ViewHolder
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(context).inflate(R.layout.temario_item, parent, false)
+            val view = LayoutInflater.from(context).inflate(R.layout.material_item, parent, false)
             return ViewHolder(view)
         }
 
@@ -63,7 +63,7 @@ class DetailAdapter (
                     items
                 } else {
                     items.filter {
-                        it.title.lowercase().contains(query) || it.description.lowercase().contains(query)
+                        it.name.lowercase().contains(query)
                     }
                 }
 

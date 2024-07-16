@@ -83,8 +83,7 @@ class temario : Fragment() {
 
         adapter = TemarioAdapter(requireContext(), items){ item ->
             val bundle = Bundle().apply {
-                putString("title", item.title)
-                putString("description", item.description)
+                putInt("temario", item.id)
             }
             findNavController().navigate(R.id.action_temario_to_material, bundle)
         }

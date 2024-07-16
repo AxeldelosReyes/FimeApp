@@ -5,39 +5,56 @@
     tools:showIn="@layout/fragment_material"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    card_view:cardCornerRadius="4dp"
+    android:layout_margin="20dp"
+    card_view:cardCornerRadius="10dp"
     card_view:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            tools:text="Sample Title"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="wrap_content"
-            tools:text="Sample Title"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="14sp"/>
+            <View
+                android:id="@+id/circleView"
+                android:layout_margin="15dp"
+                android:alpha="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/green_circle" />
 
-        <ImageView
-            android:id="@+id/imageView"
+            <ImageView
+                android:id="@+id/imageViewMaterial"
+                android:layout_margin="18dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="clip_vertical"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sample_image" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            tools:text="Sample Title"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginLeft="5dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            >
+            <TextView
+                android:id="@+id/textViewDescriptionMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Description"
+                android:textSize="14sp"
+                tools:text="Sample Description" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

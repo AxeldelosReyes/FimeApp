@@ -31,13 +31,17 @@ class material : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val title = requireArguments().getString("title")
-        val description = requireArguments().getString("description")
 
-        println("Title:${title}")
-        println("description:${description}")
-        items = listOf(DetailItem(title ?: "", description ?: "",  byteArrayOf(0)))
-        // TODO: Use the ViewModel
+        databaseHelper = DBHelper(requireContext())
+
+
+        val temario_id = requireArguments().getInt("temario")
+
+
+        // Read data from the table
+        items = databaseHelper.read("material", arrayOf("id",
+            "tipo","name","external_link","temario_id"),"temario_id= ?", arrayOf(temario_id.toString())).toMyItemList()
+
     }
 
     override fun onCreateView(
@@ -57,6 +61,18 @@ class material : Fragment() {
             println("material:${item}")
         }
         recyclerView.adapter = adapter
+    }
+
+    private fun List<Map<String, Any?>>.toMyItemList(): List<DetailItem> {
+        return this.map { map ->
+            DetailItem(
+                id = map["id"] as Int,
+                name = map["name"] as String,
+                external_link = (map["external_link"] ?: "").toString(),
+                tipo = map["tipo"] as String,
+                temario_id = map["temario_id"] as Int,
+            )
+        }
     }
 
 }

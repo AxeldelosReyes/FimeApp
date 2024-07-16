@@ -47,11 +47,8 @@
         android:label="fragment_material"
         tools:layout="@layout/fragment_material">
         <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
+            android:name="temario"
+            app:argType="integer" />
     </fragment>
 
 </navigation>
