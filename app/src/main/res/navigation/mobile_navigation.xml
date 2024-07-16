@@ -50,12 +50,12 @@
             android:name="temario"
             app:argType="integer" />
         <action
-            android:id="@+id/action_material_to_pdfview"
-            app:destination="@id/pdfview" />
+            android:id="@+id/action_material_to_youTubePlayerFragment"
+            app:destination="@id/youTubePlayerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/pdfview"
-        android:name="com.example.fimeapp.ui.pdfviewer.pdfview"
-        android:label="pdfview" />
+        android:id="@+id/youTubePlayerFragment"
+        android:name="com.example.fimeapp.ui.material.YouTubePlayerFragment"
+        android:label="YouTubePlayerFragment" />
 
 </navigation>

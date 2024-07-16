@@ -60,35 +60,36 @@ class material : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = DetailAdapter(requireContext(), items){ item ->
-            if (item.tipo == "pdf"){
-                if (item.external_link.isNotEmpty()){
-                    startActivity(
-                        PdfViewerActivity.launchPdfFromUrl(
-                            context = this.context, pdfUrl = item.external_link,
-                            pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
-                            enableDownload = true))
-                }
-                else if (item.uri.isNotEmpty()){
-                    startActivity(
-                    PdfViewerActivity.launchPdfFromPath(
-                        context = this.context,
-                        path = item.uri,
-                        pdfTitle = item.name,
-                        saveTo = saveTo.ASK_EVERYTIME,
-                        fromAssets = false
-                    ))
-                }
-                else{
-                    startActivity(
-                    PdfViewerActivity.launchPdfFromPath(
-                        context = this.context,
-                        path = item.asset,
-                        pdfTitle = item.name,
-                        saveTo = saveTo.ASK_EVERYTIME,
-                        fromAssets = true
-                    ))
-                }
-            }
+             findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
+//                if (item.tipo == "pdf"){
+//                if (item.external_link.isNotEmpty()){
+//                    startActivity(
+//                        PdfViewerActivity.launchPdfFromUrl(
+//                            context = this.context, pdfUrl = item.external_link,
+//                            pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
+//                            enableDownload = true))
+//                }
+//                else if (item.uri.isNotEmpty()){
+//                    startActivity(
+//                    PdfViewerActivity.launchPdfFromPath(
+//                        context = this.context,
+//                        path = item.uri,
+//                        pdfTitle = item.name,
+//                        saveTo = saveTo.ASK_EVERYTIME,
+//                        fromAssets = false
+//                    ))
+//                }
+//                else{
+//                    startActivity(
+//                    PdfViewerActivity.launchPdfFromPath(
+//                        context = this.context,
+//                        path = item.asset,
+//                        pdfTitle = item.name,
+//                        saveTo = saveTo.ASK_EVERYTIME,
+//                        fromAssets = true
+//                    ))
+//                }
+//            }
 
 
         }

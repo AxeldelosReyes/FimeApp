@@ -64,5 +64,6 @@ dependencies {
     implementation(libs.material.v140)
     implementation(libs.pdf.viewer)
     implementation(libs.picasso)
-
+    implementation(libs.core)
+    implementation(libs.custom.ui)
 }
