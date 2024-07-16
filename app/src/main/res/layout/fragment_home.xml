@@ -93,7 +93,16 @@
                 android:layout_marginStart="55dp"
                 android:textSize="18sp"
                 style="@style/GreenButton"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="140dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/viva_fime" />
 
         </LinearLayout>
     </ScrollView>

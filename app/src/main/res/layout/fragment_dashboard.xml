@@ -132,6 +132,13 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/viva_fime" />
 
     </LinearLayout>
 
