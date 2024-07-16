@@ -60,8 +60,7 @@ class temario : Fragment() {
         academia_name = databaseHelper.readName("academias", "name","id", academia_id.toString()) ?: ""
 
         // Read data from the table
-        items = databaseHelper.read("temario", arrayOf("id",
-            "imagen","materia","titulo","descripcion"),"materia= ?", arrayOf(materia_id.toString()),orderBy ="titulo").toMyItemList()
+        items = databaseHelper.read("temario",columns= arrayOf("id","imagen","materia","titulo","descripcion","imagen_url"),"materia= ?", selectionArgs=arrayOf(materia_id.toString()),orderBy ="titulo").toMyItemList()
         // Print results
         for (row in items) {
             println(row)
@@ -143,7 +142,8 @@ class temario : Fragment() {
                 title = map["titulo"] as String,
                 materia = map["materia"] as Int,
                 description = map["descripcion"] as String,
-                image =  map["imagen"] ?: ByteArray(0)
+                image =  map["imagen"] ?: ByteArray(0),
+                imagen_url =  map["imagen_url"] as String,
             )
         }
     }

@@ -15,7 +15,8 @@ data class MyItem(
     val materia: Int,
     val title: String,
     val description: String,
-    val image: Any
+    val image: Any,
+    val imagen_url: String
 )
 
 

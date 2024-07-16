@@ -1,5 +1,6 @@
 package com.example.fimeapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -21,6 +22,7 @@ class Home : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,7 +63,6 @@ class Home : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
             navView.menu.findItem(R.id.navigation_back).setEnabled(true)
-
             when (destination.id) {
                 R.id.navigation_home -> {
                     navView.menu.findItem(R.id.navigation_back).setEnabled(false)
@@ -69,10 +70,13 @@ class Home : AppCompatActivity() {
 //                    navView.menu.findItem(R.id.navigation_back).isVisible = false
                 }
                 R.id.navigation_dashboard -> {
+                    navView.menu.findItem(R.id.navigation_back).setEnabled(false)
+                    navView.menu.findItem(R.id.navigation_back)
 //                    navView.menu.findItem(R.id.navigation_dashboard).isChecked = true
 //                    navView.menu.findItem(R.id.navigation_back).isVisible = false
                 }
                 R.id.navigation_favoritos -> {
+                    navView.menu.findItem(R.id.navigation_back).setEnabled(false)
 //                    navView.menu.findItem(R.id.navigation_favoritos).isChecked = true
 //                    navView.menu.findItem(R.id.navigation_back).isVisible = false
                 }

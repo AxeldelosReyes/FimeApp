@@ -1,7 +1,9 @@
 package com.example.fimeapp.ui.material
 
+import android.content.ContentValues
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,10 @@ class material : Fragment() {
         items = databaseHelper.read("material", arrayOf("id",
             "tipo","name","external_link","temario_id","asset","uri"),"temario_id= ?", arrayOf(temario_id.toString()), orderBy ="name").toMyItemList()
 
+        items.forEach { item ->
+            item.like = this.isFavorite(item.id)
+        }
+
     }
 
     override fun onCreateView(
@@ -76,6 +82,7 @@ class material : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_material, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
+        searchView = view.findViewById(R.id.searchViewMaterial)
         return view
 
     }
@@ -94,43 +101,60 @@ class material : Fragment() {
 
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = DetailAdapter(requireContext(), items){ item ->
-                if (item.tipo == "pdf"){
-                if (item.external_link.isNotEmpty()){
+        adapter = DetailAdapter(requireContext(), items, { item ->
+            // Handle item click
+            if (item.tipo == "pdf") {
+                if (item.external_link.isNotEmpty()) {
                     startActivity(
                         PdfViewerActivity.launchPdfFromUrl(
                             context = this.context, pdfUrl = item.external_link,
                             pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
-                            enableDownload = true))
-                }
-                else if (item.uri.isNotEmpty()){
+                            enableDownload = true
+                        )
+                    )
+                } else if (item.uri.isNotEmpty()) {
                     startActivity(
-                    PdfViewerActivity.launchPdfFromPath(
-                        context = this.context,
-                        path = item.uri,
-                        pdfTitle = item.name,
-                        saveTo = saveTo.ASK_EVERYTIME,
-                        fromAssets = false
-                    ))
-                }
-                else{
+                        PdfViewerActivity.launchPdfFromPath(
+                            context = this.context,
+                            path = item.uri,
+                            pdfTitle = item.name,
+                            saveTo = saveTo.ASK_EVERYTIME,
+                            fromAssets = false
+                        )
+                    )
+                } else {
                     startActivity(
-                    PdfViewerActivity.launchPdfFromPath(
-                        context = this.context,
-                        path = item.asset,
-                        pdfTitle = item.name,
-                        saveTo = saveTo.ASK_EVERYTIME,
-                        fromAssets = true
-                    ))
+                        PdfViewerActivity.launchPdfFromPath(
+                            context = this.context,
+                            path = item.asset,
+                            pdfTitle = item.name,
+                            saveTo = saveTo.ASK_EVERYTIME,
+                            fromAssets = true
+                        )
+                    )
                 }
+            } else if (item.tipo == "video") {
+                findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
             }
-                else if (item.tipo == "video"){
-                    findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
-
-                }
-
-        }
+        }, { item ->
+            // Handle toggle favorite
+           this.toggleFavorite(item)
+        })
         recyclerView.adapter = adapter
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
+
     }
 
     private fun List<Map<String, Any?>>.toMyItemList(): List<DetailItem> {
@@ -143,8 +167,46 @@ class material : Fragment() {
                 uri = (map["uri"] ?: "").toString(),
                 asset = (map["asset"] ?: "").toString(),
                 temario_id = map["temario_id"] as Int,
+                like = false,
             )
         }
     }
+
+
+    private fun isFavorite(id: Int): Boolean {
+        val db = databaseHelper.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM favoritos WHERE material_id=? and uuid=?", arrayOf(id.toString(), current_user?.uid ?: "prueba"))
+        val isFavorite = cursor.count > 0
+        cursor.close()
+        return isFavorite
+    }
+
+    fun toggleFavorite(item: DetailItem) {
+        val db = databaseHelper.writableDatabase
+        if (item.like) {
+            // Insert into favoritos
+            val contentValues = ContentValues().apply {
+                put("material_id", item.id)
+                put("materia_id", materia_id)
+                put("academia_id", academia_id)
+                put("uuid", current_user?.uid ?: "prueba")
+            }
+            val newRowId = db.insert("favoritos", null, contentValues)
+            if (newRowId == -1L) {
+                Log.e("DB_INSERT", "Failed to insert item into favoritos")
+            } else {
+                Log.i("DB_INSERT", "Item inserted into favoritos with row ID: $newRowId")
+            }
+
+        } else {
+            val rowsDeleted = db.delete("favoritos", "material_id=? and uuid=?", arrayOf(item.id.toString(), current_user?.uid  ?: "prueba"))
+            if (rowsDeleted == 0) {
+                Log.e("DB_DELETE", "Failed to delete item from favoritos")
+            } else {
+                Log.i("DB_DELETE", "Item deleted from favoritos")
+            }
+        }
+    }
+
 
 }

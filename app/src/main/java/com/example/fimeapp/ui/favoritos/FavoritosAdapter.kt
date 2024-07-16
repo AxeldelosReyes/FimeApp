@@ -1,4 +1,4 @@
-package com.example.fimeapp.ui.material
+package com.example.fimeapp.ui.favoritos
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,8 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
+import com.example.fimeapp.ui.home.SpinnerItem
 
-data class DetailItem(
+data class FavDetailItem(
     val id: Int,
     val name: String,
     val temario_id: Int,
@@ -23,14 +24,14 @@ data class DetailItem(
 )
 
 
-class DetailAdapter (
+class FavoritosAdapter (
     private val context: Context,
-    private val items: List<DetailItem>,
-    private val itemClickListener: (DetailItem) -> Unit,
-    private val toggleFavorite: (DetailItem) -> Unit
-    ) : RecyclerView.Adapter<DetailAdapter.ViewHolder>(), Filterable {
+    private val items: List<FavDetailItem>,
+    private val itemClickListener: (FavDetailItem) -> Unit,
+    private val toggleFavorite: (FavDetailItem) -> Unit
+    ) : RecyclerView.Adapter<FavoritosAdapter.ViewHolder>(), Filterable {
 
-        private var itemsFiltered: List<DetailItem> = items
+        private var itemsFiltered: List<FavDetailItem> = items
 
         // ViewHolder class to hold item views
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,18 +40,18 @@ class DetailAdapter (
             val CircleView: View = itemView.findViewById(R.id.circleView)
             val love: View = itemView.findViewById(R.id.love)
 
-            fun bind(item: DetailItem, position: Int) {
+            fun bind(item: FavDetailItem, position: Int) {
                 textViewDescription.text = item.name
                 textViewDescription.setOnClickListener { itemClickListener(item) }
                 imageView.setOnClickListener { itemClickListener(item) }
                 CircleView.setOnClickListener { itemClickListener(item) }
+                love.setBackgroundResource(if (item.like) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
+
                 love.setOnClickListener {
                     item.like = !item.like
                     toggleFavorite(item)
-                    notifyItemChanged(position)
+                    notifyItemRemoved(position)
                 }
-                // Update love view based on item's like status
-                love.setBackgroundResource(if (item.like) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
             }
         }
 
@@ -91,9 +92,14 @@ class DetailAdapter (
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
-                itemsFiltered = filterResults?.values as List<DetailItem>
+                itemsFiltered = filterResults?.values as List<FavDetailItem>
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun updateItems(newItems: List<FavDetailItem>) {
+        itemsFiltered = newItems
+        notifyDataSetChanged()
     }
 }
