@@ -13,98 +13,93 @@
         android:scaleType="fitXY"
         android:src="@drawable/fondo_letras_fime" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="55dp"
-                    android:scaleType="centerCrop"
-                    android:alpha="0.8"
-                    android:src="@drawable/logo_uni_verde" />
-
-                <View
-                    android:layout_width="160dp"
-                    android:layout_height="0dp" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_marginTop="50dp"
-                    android:scaleType="centerCrop"
-                    android:alpha="0.6"
-                    android:src="@drawable/logo_fime_verde" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
-            <Spinner
-                android:id="@+id/spinnerPlan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="50dp" />
-
-            <Spinner
-                android:id="@+id/spinnerAcademia"
-                android:layout_width="match_parent"
-                android:background="@android:color/transparent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="50dp" />
-
-            <Spinner
-                android:id="@+id/spinnerMateria"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="60dp" />
-
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:text="ACEPTAR"
-                android:layout_marginStart="55dp"
-                android:textSize="18sp"
-                style="@style/GreenButton"
-                android:layout_marginTop="10dp" />
+            tools:ignore="MissingConstraints">
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="35dp"
                 android:adjustViewBounds="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="140dp"
+                android:alpha="0.8"
                 android:scaleType="centerCrop"
-                android:src="@drawable/viva_fime" />
+                android:src="@drawable/logo_uni_verde" />
+
+            <View
+                android:layout_width="160dp"
+                android:layout_height="0dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.6"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo_fime_verde" />
 
         </LinearLayout>
-    </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Spinner
+            android:id="@+id/spinnerPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="50dp" />
+
+        <Spinner
+            android:id="@+id/spinnerAcademia"
+            android:layout_width="match_parent"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp" />
+
+        <Spinner
+            android:id="@+id/spinnerMateria"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="60dp" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="ACEPTAR"
+            android:layout_marginStart="55dp"
+            android:textSize="18sp"
+            style="@style/GreenButton"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="140dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/viva_fime" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
