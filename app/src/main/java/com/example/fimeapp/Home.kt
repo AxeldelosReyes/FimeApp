@@ -2,9 +2,13 @@ package com.example.fimeapp
 
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,6 +32,8 @@ class Home : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.visibility = View.GONE
 
+        window.statusBarColor = getColor(R.color.black)
+
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -36,6 +42,7 @@ class Home : AppCompatActivity() {
                 R.id.navigation_back, R.id.navigation_home, R.id.navigation_dashboard
             ),
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         // Handle navigation item selection

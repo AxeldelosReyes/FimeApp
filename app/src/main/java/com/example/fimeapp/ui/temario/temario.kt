@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.db_manager.DBHelper
+import com.example.fimeapp.ui.home.SpinnerItem
 
 class temario : Fragment() {
 
@@ -27,15 +28,25 @@ class temario : Fragment() {
     private lateinit var items: List<MyItem>
     private lateinit var searchView: SearchView
 
+    private var plan_id = 0
+    private var materia_id = 0
+    private var academia_id = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         databaseHelper = DBHelper(requireContext())
 
+
+        plan_id = requireArguments().getInt("plan")
+        materia_id = requireArguments().getInt("materia")
+        academia_id = requireArguments().getInt("academia")
+
+
+
         // Read data from the table
-        val items = databaseHelper.read("study_plan", arrayOf("id", "name"))
-
-
+        items = databaseHelper.read("temario", arrayOf("id",
+            "imagen","materia","titulo","descripcion"),"materia= ?", arrayOf(materia_id.toString())).toMyItemList()
         // Print results
         for (row in items) {
             println(row)
@@ -60,11 +71,12 @@ class temario : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         // Read data from the table
-        val itemsFromDb = databaseHelper.read("study_plan", arrayOf("id", "name"))
+
+
 
         // Convert results to List<MyItem>
-        items = itemsFromDb.toMyItemList()
 
         // Set up the RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -99,9 +111,11 @@ class temario : Fragment() {
     private fun List<Map<String, Any?>>.toMyItemList(): List<MyItem> {
         return this.map { map ->
             MyItem(
-                title = map["id"].toString() as String,
-                description = map["name"] as String,
-                image =  ByteArray(0)
+                id = map["id"] as Int,
+                title = map["titulo"] as String,
+                materia = map["materia"] as Int,
+                description = map["descripcion"] as String,
+                image =  map["imagen"] ?: ByteArray(0)
             )
         }
     }

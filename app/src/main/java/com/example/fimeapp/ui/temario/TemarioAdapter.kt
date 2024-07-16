@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 
 data class MyItem(
+    val id : Int,
+    val materia: Int,
     val title: String,
     val description: String,
-    val image: ByteArray
+    val image: Any
 )
 
 

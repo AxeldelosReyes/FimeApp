@@ -30,6 +30,15 @@
             android:id="@+id/action_temario_to_material"
             app:destination="@id/material"
             app:popUpTo="@id/temario" />
+        <argument
+            android:name="plan"
+            app:argType="integer" />
+        <argument
+            android:name="academia"
+            app:argType="integer" />
+        <argument
+            android:name="materia"
+            app:argType="integer" />
     </fragment>
 
     <fragment

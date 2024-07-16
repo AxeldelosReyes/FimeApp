@@ -36,15 +36,33 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
 
-        setupLogin()
-        setupSpinners()
+        if (savedInstanceState == null){
+            setupLogin()
+            setupSpinners()
+        }
+
 
         return root
     }
 
     private fun setupLogin() {
         binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_temario)
+            val selectedPlan =  binding.spinnerPlan.selectedItem as SpinnerItem
+            val selectedAcademia =  binding.spinnerAcademia.selectedItem as SpinnerItem
+            val selectedMateria =  binding.spinnerMateria.selectedItem as SpinnerItem
+
+            if (selectedPlan.id == 0 || selectedAcademia.id == 0 || selectedMateria.id == 0){
+                println("Error")
+            }else{
+                val bundle = Bundle().apply {
+                    putInt("plan", selectedPlan.id)
+                    putInt("academia", selectedAcademia.id)
+                    putInt("materia", selectedMateria.id)
+                }
+                findNavController().navigate(R.id.action_navigation_home_to_temario, bundle)
+
+            }
+
         }
     }
 
@@ -80,7 +98,8 @@ class HomeFragment : Fragment() {
     private fun setSpinnerListeners() {
         binding.spinnerPlan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (position == 0) {
+                if (view == null) {}
+                else if (position == 0) {
                     resetSpinner(binding.spinnerMateria)
                 } else {
                  update_materia_items()
@@ -91,7 +110,8 @@ class HomeFragment : Fragment() {
         }
         binding.spinnerAcademia.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (position == 0) {
+                if (view == null) {}
+                else if (position == 0) {
                     resetSpinner(binding.spinnerMateria)
                 } else {
                     resetSpinner(binding.spinnerMateria)

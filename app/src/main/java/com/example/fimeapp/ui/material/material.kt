@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.db_manager.DBHelper
+import com.example.fimeapp.ui.temario.MyItem
 
 
 class material : Fragment() {
