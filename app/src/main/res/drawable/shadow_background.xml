@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sombra gris en los lados y abajo -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/darker_gray" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Cuadro blanco desplazado para mostrar sombra en los lados y abajo -->
+    <item android:left="0dp" android:top="0dp" android:right="4dp" android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</layer-list>
