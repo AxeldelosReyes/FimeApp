@@ -127,6 +127,17 @@
                     android:layout_marginBottom="16dp"
                     android:textSize="16sp" />
 
+                <Button
+                    android:id="@+id/cerrarBtn"
+                    style="@style/GreenButton"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar sesión "
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textSize="16sp" />
+
             </LinearLayout>
 
 
