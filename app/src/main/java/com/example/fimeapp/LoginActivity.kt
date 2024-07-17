@@ -3,6 +3,7 @@ package com.example.fimeapp
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.Gravity
 import android.widget.Button
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 
 
 class LoginActivity : AppCompatActivity() {
@@ -49,16 +51,12 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
-                            showErrorDialog("Usuario capturado no existe. Favor de revisar en su dependencia..")
+                            showErrorDialog("Usuario capturado no existe. Favor de revisar en su dependencia.")
                         }
                     }
             }
         }
 
-//        binding.move.setOnClickListener {
-//            val intent = Intent(this, SingupActivity::class.java)
-//            startActivity(intent)
-//        }
         binding.skip.setOnClickListener {
             val intent = Intent(this, Home::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -66,7 +64,19 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        // Implementación del alternador de visibilidad de contraseña
+        binding.passwordLayout.setEndIconOnClickListener {
+            val inputType = binding.password.inputType
+            if (inputType == (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+                binding.password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                binding.passwordLayout.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.ic_visibility)
+            } else {
+                binding.password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.passwordLayout.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.ic_visibility_off)
+            }
+            // Mueve el cursor al final del texto
+            binding.password.setSelection(binding.password.text?.length ?: 0)
+        }
     }
 
     public override fun onStart() {
@@ -95,5 +105,4 @@ class LoginActivity : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
-
 }
