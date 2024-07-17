@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -40,8 +41,10 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 showErrorDialog("Por favor, ingresa el correo y la contraseña.")
             } else {
+                showProgressBar()
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        hideProgressBar()
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
@@ -104,5 +107,19 @@ class LoginActivity : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", null)
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.continueBtn.isEnabled = false
+        binding.email.isEnabled = false
+        binding.password.isEnabled = false
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.GONE
+        binding.continueBtn.isEnabled = true
+        binding.email.isEnabled = true
+        binding.password.isEnabled = true
     }
 }
