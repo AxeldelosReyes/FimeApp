@@ -32,6 +32,12 @@
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_home" />
+        <activity
+            android:name=".AdminHome"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_home" />
     </application>
 
 </manifest>
