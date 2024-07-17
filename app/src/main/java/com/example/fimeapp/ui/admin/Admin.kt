@@ -1,6 +1,7 @@
 package com.example.fimeapp.ui.admin
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -25,6 +26,16 @@ class Admin : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        toolbar.visibility = View.GONE
+        window.statusBarColor = getColor(R.color.black)
+
+        val fab: View = findViewById(R.id.fab)
+        fab.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+
+        }
+
+
 
 
         val navController = findNavController(R.id.nav_host_fragment_activity_admin)

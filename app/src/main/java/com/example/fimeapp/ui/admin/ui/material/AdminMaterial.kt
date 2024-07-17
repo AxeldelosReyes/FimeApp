@@ -133,7 +133,7 @@ class AdminMaterial : Fragment() {
                     )
                 }
             } else if (item.tipo == "video") {
-                findNavController().navigate(R.id.action_material_to_youTubePlayerFragment)
+                findNavController().navigate(R.id.action_adminMaterial_to_youTubePlayerFragment2)
             }
         }, { item ->
             // Handle toggle favorite

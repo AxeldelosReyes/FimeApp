@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home_admin"
         android:name="com.example.fimeapp.ui.admin.ui.home.AdminHomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home_admin" />
+        tools:layout="@layout/fragment_home_admin" >
+        <action
+            android:id="@+id/action_navigation_home_admin_to_adminTemario"
+            app:destination="@id/adminTemario" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard_admin"
@@ -22,4 +26,26 @@
         android:name="com.example.fimeapp.ui.admin.ui.favoritos.AdminFavoritos"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_favoritos_admin" />
+    <fragment
+        android:id="@+id/adminTemario"
+        android:name="com.example.fimeapp.ui.admin.ui.temario.AdminTemario"
+        android:label="fragment_temario_admin"
+        tools:layout="@layout/fragment_temario_admin" >
+        <action
+            android:id="@+id/action_adminTemario_to_adminMaterial"
+            app:destination="@id/adminMaterial" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminMaterial"
+        android:name="com.example.fimeapp.ui.admin.ui.material.AdminMaterial"
+        android:label="fragment_material_admin"
+        tools:layout="@layout/fragment_material_admin" >
+        <action
+            android:id="@+id/action_adminMaterial_to_youTubePlayerFragment2"
+            app:destination="@id/youTubePlayerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/youTubePlayerFragment2"
+        android:name="com.example.fimeapp.ui.material.YouTubePlayerFragment"
+        android:label="YouTubePlayerFragment" />
 </navigation>

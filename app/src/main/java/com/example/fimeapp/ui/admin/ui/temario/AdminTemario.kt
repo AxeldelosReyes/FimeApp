@@ -110,7 +110,7 @@ class AdminTemario : Fragment() {
                 putInt("materia", materia_id)
                 putInt("academia", academia_id)
             }
-            findNavController().navigate(R.id.action_temario_to_material, bundle)
+            findNavController().navigate(R.id.action_adminTemario_to_adminMaterial, bundle)
         }
 
         recyclerView.adapter = adapter

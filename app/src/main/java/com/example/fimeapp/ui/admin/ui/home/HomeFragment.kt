@@ -62,7 +62,7 @@ class AdminHomeFragment : Fragment() {
                     putInt("academia", selectedAcademia.id)
                     putInt("materia", selectedMateria.id)
                 }
-                findNavController().navigate(R.id.action_navigation_home_to_temario, bundle)
+                findNavController().navigate(R.id.action_navigation_home_admin_to_adminTemario, bundle)
 
             }
 
