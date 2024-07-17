@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/navigation_favoritos_admin"
+        android:icon="@drawable/baseline_favorite_border_24"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/navigation_home_admin"
+        android:icon="@drawable/icon_home"
+        android:title="@string/title_home" />
+
+
+    <item
+        android:id="@+id/navigation_dashboard_admin"
+        android:icon="@drawable/icono_perfil"
+        android:title="@string/title_dashboard" />
+
+
+
+</menu>

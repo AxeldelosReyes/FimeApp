@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FimeApp"
         tools:targetApi="31">
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -23,15 +24,17 @@
         </activity>
         <activity
             android:name=".SingupActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".Home"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan|adjustResize"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_home" />
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".ui.admin.Admin"
+            android:exported="false"
+            android:label="@string/title_activity_admin" />
     </application>
 
 </manifest>

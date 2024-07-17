@@ -20,6 +20,7 @@ import com.google.firebase.auth.auth
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.example.fimeapp.ui.admin.Admin
 
 
 class LoginActivity : AppCompatActivity() {
@@ -62,6 +63,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.skip.setOnClickListener {
             val intent = Intent(this, Home::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            // Start the Activity
+            startActivity(intent)
+        }
+
+
+        binding.skipadmin.setOnClickListener {
+            val intent = Intent(this, Admin::class.java)
 //            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             // Start the Activity
             startActivity(intent)
