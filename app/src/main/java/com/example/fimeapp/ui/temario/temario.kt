@@ -75,6 +75,8 @@ class temario : Fragment() {
     ): View {
 
         val view = inflater.inflate(R.layout.fragment_temario, container, false)
+
+
         // Set up the RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
         searchView = view.findViewById(R.id.searchView)
