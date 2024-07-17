@@ -45,45 +45,41 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="47dp"
+        android:layout_width="560dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_margin="125dp"
+        android:layout_margin="120dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:scaleType="centerCrop"
         android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/shadow_background" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iconPlan"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_calendar_btn_green" />
 
             <TextView
                 android:id="@+id/textViewPlan"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/iconPlan"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/shadow_background_icons"
+                android:gravity="center"
                 android:text="Plan"
-                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -91,60 +87,71 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/shadow_background" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iconAcademia"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_building_btn_green" />
 
             <TextView
                 android:id="@+id/textViewAcademia"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/iconPlan"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/shadow_background_icons"
+                android:gravity="center"
                 android:text="Academia"
-                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 tools:ignore="NotSibling" />
         </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="560dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_margin="160dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/shadow_background" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iconMateria"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_book_btn_green" />
 
             <TextView
                 android:id="@+id/textViewMateria"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/iconPlan"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/shadow_background_icons"
+                android:gravity="center"
                 android:text="Materia"
-                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 tools:ignore="NotSibling" />
         </RelativeLayout>
 
@@ -154,7 +161,7 @@
         android:id="@+id/textViewMaterial"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         android:layout_weight="1"
         android:text="Material"
         android:textAlignment="center"
