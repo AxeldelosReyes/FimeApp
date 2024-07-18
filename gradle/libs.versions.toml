@@ -22,6 +22,8 @@ fragmentKtx = "1.8.1"
 firebaseAuthV= "23.0.0"
 pdfViewer = "latest-version"
 picasso = "2.8"
+googleGmsGoogleServices = "4.4.2"
+firebaseFirestore = "25.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,8 +51,10 @@ firebaseAuth = {group="com.google.firebase" , name="firebase-auth", version.ref=
 material-v140 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 pdf-viewer = { module = "io.github.afreakyelf:Pdf-Viewer", version = "2.1.1" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

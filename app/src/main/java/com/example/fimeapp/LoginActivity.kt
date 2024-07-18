@@ -14,18 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fimeapp.databinding.ActivityLoginBinding
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.fimeapp.ui.admin.Admin
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
+        database = Firebase.firestore
 
         binding.continueBtn.setOnClickListener {
             val email = binding.email.text.toString().trim()
@@ -50,8 +55,10 @@ class LoginActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
                             val user = auth.currentUser
-                            val intent = Intent(this, Home::class.java)
-                            startActivity(intent)
+
+                            if (user != null) {
+                                checkUserRole(user.uid)
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -122,4 +129,30 @@ class LoginActivity : AppCompatActivity() {
         binding.email.isEnabled = true
         binding.password.isEnabled = true
     }
+
+    private fun checkUserRole(userId: String) {
+
+
+        val docRef = database.collection("usuarios").document(userId)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val role = document.getString("rol")
+                    if (role == "admin") {
+                        val intent = Intent(this, Admin::class.java)
+                        startActivity(intent)
+                    }
+                    else if (role == "user") {
+                        val intent = Intent(this, Home::class.java)
+                        startActivity(intent)
+                    }
+                } else {
+                    Log.d("UserRole", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("UserRole", "get failed with ", exception)
+            }
+    }
+
 }
