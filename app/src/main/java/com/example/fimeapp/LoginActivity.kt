@@ -22,7 +22,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.awaitAll
 
 
 class LoginActivity : AppCompatActivity() {
@@ -133,26 +135,27 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUserRole(userId: String) {
 
 
-        val docRef = database.collection("usuarios").document(userId)
+        val docRef = database.collection("administradores").document(userId)
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val role = document.getString("rol")
-                    if (role == "admin") {
-                        val intent = Intent(this, Admin::class.java)
-                        startActivity(intent)
-                    }
-                    else if (role == "user") {
-                        val intent = Intent(this, Home::class.java)
-                        startActivity(intent)
-                    }
-                } else {
-                    Log.d("UserRole", "No such document")
+                    val intent = Intent(this, Admin::class.java)
+                    startActivity(intent)
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.d("UserRole", "get failed with ", exception)
+
+        val new_ref = database.collection("usuarios").document(userId)
+        new_ref.get()
+            .addOnSuccessListener { doc ->
+                if (doc != null) {
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
+                }
             }
+
+
+
+
     }
 
 }
