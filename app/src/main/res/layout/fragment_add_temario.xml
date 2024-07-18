@@ -246,6 +246,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="55dp"
                 android:src="@drawable/icon_save" />
+            <ImageView
+                android:id="@+id/iconDelete"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:tint="@color/black"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/baseline_delete_24" />
 
 
         </RelativeLayout>

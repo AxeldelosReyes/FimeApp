@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.fimeapp.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 
 class AddTemario : Fragment() {
@@ -92,6 +94,17 @@ class AddTemario : Fragment() {
 
         }
 
+        view.findViewById<ImageView>(R.id.iconDelete).setOnClickListener {
+
+            val db = Firebase.firestore
+            val current_user = FirebaseAuth.getInstance().currentUser
+
+            db.collection("temario").document(temario_id).delete()
+                .addOnSuccessListener { result ->
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+
+                }
+        }
 
 
         return view

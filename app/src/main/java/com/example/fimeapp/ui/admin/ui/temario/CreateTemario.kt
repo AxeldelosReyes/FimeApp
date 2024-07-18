@@ -91,15 +91,21 @@ class CreateTemario : Fragment() {
             val nombre =  view.findViewById<TextInputEditText>(R.id.addTittle).text.toString()
             val descripcion =  view.findViewById<TextInputEditText>(R.id.addText).text.toString()
 
+            if (nombre.isNullOrEmpty() || descripcion.isNullOrEmpty()) {
+
+            }else{
+                savetoFirebase(hashMapOf(
+                    "imagen_url" to urlInput.text.toString(),
+                    "materia" to Firebase.firestore.collection("materias").document(materia_id),
+                    "name" to  nombre,
+                    "descripcion" to descripcion
+
+                ))
 
 
-            savetoFirebase(hashMapOf(
-                "imagen_url" to urlInput.text.toString(),
-                "materia" to Firebase.firestore.collection("materias").document(materia_id),
-                "name" to  nombre,
-                "descripcion" to descripcion
+            }
 
-            ))
+
         }
         urlInput = view.findViewById(R.id.urlInput)
 

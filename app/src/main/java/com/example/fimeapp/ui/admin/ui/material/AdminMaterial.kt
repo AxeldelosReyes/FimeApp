@@ -59,9 +59,9 @@ class AdminMaterial : Fragment() {
         current_user = Firebase.auth.currentUser
 
         temario_id = requireArguments().getString("temario_id").toString()
-        plan_id = requireArguments().getString("plan").toString()
-        materia_id = requireArguments().getString("materia").toString()
-        academia_id = requireArguments().getString("academia").toString()
+        plan_id = requireArguments().getString("plan_id").toString()
+        materia_id = requireArguments().getString("materia_id").toString()
+        academia_id = requireArguments().getString("academia_id").toString()
 
 
         plan_name = requireArguments().getString("plan_name").toString()
@@ -87,7 +87,13 @@ class AdminMaterial : Fragment() {
 
         iconAdd.setOnClickListener{
             val bundle = Bundle().apply {
-                putString("academia", academia_id)
+                putString("temario_id", temario_id)
+                putString("plan_id", plan_id)
+                putString("academia_id", academia_id)
+                putString("materia_id", materia_id)
+                putString("plan_name", plan_name)
+                putString("academia_name", academia_name)
+                putString("materia_name", materia_name)
             }
             findNavController().navigate(R.id.action_adminMaterial_to_createMaterial, bundle)
 
