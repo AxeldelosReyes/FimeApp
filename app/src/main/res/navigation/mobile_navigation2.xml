@@ -40,6 +40,24 @@
         <action
             android:id="@+id/action_adminTemario_to_createTemario"
             app:destination="@id/createTemario" />
+        <argument
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/adminMaterial"
@@ -49,6 +67,30 @@
         <action
             android:id="@+id/action_adminMaterial_to_youTubePlayerFragment2"
             app:destination="@id/youTubePlayerFragment2" />
+        <action
+            android:id="@+id/action_adminMaterial_to_createMaterial"
+            app:destination="@id/createMaterial" />
+        <argument
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="temario_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/youTubePlayerFragment2"
@@ -58,10 +100,78 @@
         android:id="@+id/addTemario"
         android:name="com.example.fimeapp.ui.admin.ui.temario.AddTemario"
         android:label="fragment_add_temario"
-        tools:layout="@layout/fragment_add_temario" />
+        tools:layout="@layout/fragment_add_temario" >
+        <argument
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/createTemario"
         android:name="com.example.fimeapp.ui.admin.ui.temario.CreateTemario"
         android:label="fragment_create_temario"
-        tools:layout="@layout/fragment_create_temario" />
+        tools:layout="@layout/fragment_create_temario">
+        <argument
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="temario_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createMaterial"
+        android:name="com.example.fimeapp.ui.admin.ui.material.CreateMaterial"
+        android:label="fragment_create_material"
+        tools:layout="@layout/fragment_create_material">
+        <argument
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="temario_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
+    </fragment>
 </navigation>

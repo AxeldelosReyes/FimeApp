@@ -143,15 +143,18 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-
-        val new_ref = database.collection("usuarios").document(userId)
-        new_ref.get()
-            .addOnSuccessListener { doc ->
-                if (doc != null) {
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
-                }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Error getting document", exception)
             }
+
+//        val new_ref = database.collection("usuarios").document(userId)
+//        new_ref.get()
+//            .addOnSuccessListener { doc ->
+//                if (doc != null) {
+//                    val intent = Intent(this, Home::class.java)
+//                    startActivity(intent)
+//                }
+//            }
 
 
 
