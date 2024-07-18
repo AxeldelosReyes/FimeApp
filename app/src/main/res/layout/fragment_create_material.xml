@@ -263,43 +263,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addTittle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Editar título aquí"
-            android:inputType="text|textMultiLine"
-            android:textAlignment="center"
-            android:textColorHint="#000000" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Editar texto aquí"
-            android:inputType="text|textMultiLine"
-            android:minHeight="200dp"
-            android:textAlignment="center"
-            android:textColorHint="#000000">
 
-        </com.google.android.material.textfield.TextInputEditText>
+            <EditText
+                android:id="@+id/urlInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="Subir PDF aqui" />
 
         <Button
-            android:id="@+id/select_image_button"
+            android:id="@+id/select_pdf_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Seleccionar PDF"
             android:layout_gravity="center"
-            android:text="Agregar una imagen" />
-
+            android:layout_centerInParent="true"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="60dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent">

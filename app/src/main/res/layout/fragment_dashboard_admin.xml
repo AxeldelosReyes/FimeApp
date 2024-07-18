@@ -161,16 +161,6 @@
                     android:elevation="4dp"
                     android:padding="16dp" />
 
-                <Button
-                    android:id="@+id/passwordBtn"
-                    style="@style/GreenButton"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Cambiar contraseña"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/cerrarBtn"

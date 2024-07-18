@@ -2,6 +2,7 @@
 agp = "8.5.1"
 core = "12.1.0"
 firebaseBom = "33.1.2"
+firebaseBomVersion = "32.8.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -24,6 +25,7 @@ pdfViewer = "latest-version"
 picasso = "2.8"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.0.0"
+firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +34,9 @@ custom-ui = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:custom-u
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-bom-v3280 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
+firebase-database = { module = "com.google.firebase:firebase-database" }
+firebase-storage = { module = "com.google.firebase:firebase-storage" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -52,6 +57,7 @@ material-v140 = { module = "com.google.android.material:material", version.ref =
 pdf-viewer = { module = "io.github.afreakyelf:Pdf-Viewer", version = "2.1.1" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

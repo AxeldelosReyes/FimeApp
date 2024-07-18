@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
+import com.squareup.picasso.Picasso
 
 data class MyItem(
     val id : Int,
@@ -33,6 +35,7 @@ class TemarioAdapter (
         // ViewHolder class to hold item views
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
+            val imageView: ImageView = itemView.findViewById(R.id.imageView)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
             val linearLayout : LinearLayout = itemView.findViewById(R.id.linearLayout)
             val addButton: View = itemView.findViewById(R.id.add_btn)
@@ -42,6 +45,10 @@ class TemarioAdapter (
                 textViewDescription.text = item.description
                 addButton.setOnClickListener { addButtonClickListener(item) }
                 linearLayout.setOnClickListener { itemClickListener(item) }
+                Picasso.get()
+                    .load(item.imagen_url)
+                    .into(imageView)
+
             }
         }
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -82,7 +83,20 @@ class AdminMaterial : Fragment() {
         val view = inflater.inflate(R.layout.fragment_material_admin, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
+
+        val iconAdd = view.findViewById<ImageView>(R.id.iconAdd)
+
+        iconAdd.setOnClickListener{
+            val bundle = Bundle().apply {
+                putInt("academia", academia_id)
+            }
+            findNavController().navigate(R.id.action_adminMaterial_to_createMaterial, bundle)
+
+
+        }
+
         return view
+
 
     }
 

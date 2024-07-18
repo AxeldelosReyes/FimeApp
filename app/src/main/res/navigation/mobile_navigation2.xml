@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_adminMaterial_to_youTubePlayerFragment2"
             app:destination="@id/youTubePlayerFragment2" />
+        <action
+            android:id="@+id/action_adminMaterial_to_createMaterial"
+            app:destination="@id/createMaterial" />
     </fragment>
     <fragment
         android:id="@+id/youTubePlayerFragment2"
@@ -64,4 +67,9 @@
         android:name="com.example.fimeapp.ui.admin.ui.temario.CreateTemario"
         android:label="fragment_create_temario"
         tools:layout="@layout/fragment_create_temario" />
+    <fragment
+        android:id="@+id/createMaterial"
+        android:name="com.example.fimeapp.ui.admin.ui.material.CreateMaterial"
+        android:label="fragment_create_material"
+        tools:layout="@layout/fragment_create_material" />
 </navigation>
