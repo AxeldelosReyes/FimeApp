@@ -10,10 +10,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
+import com.example.fimeapp.ui.admin.ui.home.SpinnerItem
 
 data class MyItem(
-    val id : Int,
-    val materia: Int,
+    val id : String,
+    val materia: String,
     val title: String,
     val description: String,
     val image: Any,
@@ -87,4 +88,10 @@ class TemarioAdapter (
             }
         }
     }
+
+    fun updateItems(newItems: List<MyItem>) {
+        itemsFiltered = newItems
+        notifyDataSetChanged()
+    }
+
 }

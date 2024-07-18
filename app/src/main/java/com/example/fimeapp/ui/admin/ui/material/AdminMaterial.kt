@@ -32,10 +32,11 @@ class AdminMaterial : Fragment() {
     private lateinit var searchView: SearchView
 
     private var current_user: FirebaseUser? = null
-    private var temario_id = 0
-    private var plan_id = 0
-    private var materia_id = 0
-    private var academia_id = 0
+    private var plan_id : String = ""
+    private var temario_id : String = ""
+    private var materia_id : String = ""
+    private var academia_id : String = ""
+
 
     private var plan_name = ""
     private var materia_name= ""
@@ -55,14 +56,15 @@ class AdminMaterial : Fragment() {
 
         current_user = Firebase.auth.currentUser
 
-        temario_id = requireArguments().getInt("temario")
-        plan_id = requireArguments().getInt("plan")
-        materia_id = requireArguments().getInt("materia")
-        academia_id = requireArguments().getInt("academia")
+        temario_id = requireArguments().getString("temario_id").toString()
+        plan_id = requireArguments().getString("plan").toString()
+        materia_id = requireArguments().getString("materia").toString()
+        academia_id = requireArguments().getString("academia").toString()
 
-        plan_name = databaseHelper.readName("study_plan", "name","id", plan_id.toString()) ?: ""
-        materia_name = databaseHelper.readName("materias", "name","id", materia_id.toString()) ?: ""
-        academia_name = databaseHelper.readName("academias", "name","id", academia_id.toString()) ?: ""
+
+        plan_name = requireArguments().getString("plan_name").toString()
+        materia_name = requireArguments().getString("materia_name").toString()
+        academia_name = requireArguments().getString("academia_name").toString()
 
 
         // Read data from the table
