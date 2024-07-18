@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_adminMaterial_to_youTubePlayerFragment2"
             app:destination="@id/youTubePlayerFragment2" />
+        <action
+            android:id="@+id/action_adminMaterial_to_createMaterial"
+            app:destination="@id/createMaterial" />
         <argument
             android:name="plan_id"
             app:argType="string" />
@@ -144,4 +147,9 @@
             android:name="academia_name"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/createMaterial"
+        android:name="com.example.fimeapp.ui.admin.ui.material.CreateMaterial"
+        android:label="fragment_create_material"
+        tools:layout="@layout/fragment_create_material" />
 </navigation>

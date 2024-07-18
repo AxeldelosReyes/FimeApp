@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
+import com.squareup.picasso.Picasso
 
 data class DetailItem(
     val id: Int,
@@ -51,6 +52,21 @@ class DetailAdapter (
                 }
                 // Update love view based on item's like status
                 love.setBackgroundResource(if (item.like) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
+
+                val imageUrl = when (item.tipo) {
+                    "pdf" -> R.drawable.icon_pdf
+                    "video" -> R.drawable.icon_video
+                    else -> null
+                }
+
+                imageUrl?.let {
+                    Picasso.get()
+                        .load(it)
+                        .resize(100, 100)
+                        .centerInside()
+                        .into(imageView)
+                }
+
             }
         }
 

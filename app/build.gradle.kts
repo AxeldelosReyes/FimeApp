@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,4 +68,7 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.core)
     implementation(libs.custom.ui)
+    implementation(platform(libs.firebase.bom.v3280))
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.database)
 }

@@ -26,6 +26,7 @@
         android:layout_marginTop="52dp"
         android:backgroundTint="@color/white"
         app:tint="@color/button_green"
+        app:shapeAppearanceOverlay="@style/RoundedShape"
         android:contentDescription="back"
         android:src="@drawable/icon_back"
         app:layout_constraintLeft_toLeftOf="parent"

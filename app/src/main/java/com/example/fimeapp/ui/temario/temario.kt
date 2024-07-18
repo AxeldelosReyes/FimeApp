@@ -89,9 +89,6 @@ class temario : Fragment() {
         materia_text.text = materia_name
         academia_text.text = academia_name
 
-
-
-
         return view
     }
 
@@ -135,7 +132,6 @@ class temario : Fragment() {
 
 
     }
-
 
     private fun List<Map<String, Any?>>.toMyItemList(): List<MyItem> {
         return this.map { map ->
