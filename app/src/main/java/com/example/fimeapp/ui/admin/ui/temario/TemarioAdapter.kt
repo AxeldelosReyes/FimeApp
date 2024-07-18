@@ -46,9 +46,12 @@ class TemarioAdapter (
                 textViewDescription.text = item.description
                 addButton.setOnClickListener { addButtonClickListener(item) }
                 linearLayout.setOnClickListener { itemClickListener(item) }
-                Picasso.get()
-                    .load(item.imagen_url)
-                    .into(imageView)
+                if (item.imagen_url.isNotEmpty()){
+                    Picasso.get()
+                        .load(item.imagen_url)
+                        .into(imageView)
+                }
+
 
             }
         }

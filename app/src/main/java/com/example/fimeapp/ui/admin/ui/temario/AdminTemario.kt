@@ -59,7 +59,6 @@ class AdminTemario : Fragment() {
         items = mutableListOf<Map<String, Any?>>().toMyItemList()
 
 
-        fetch_from_firebase_database("temario")
     }
 
     override fun onCreateView(

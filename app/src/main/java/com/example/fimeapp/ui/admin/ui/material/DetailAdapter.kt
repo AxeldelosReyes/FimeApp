@@ -10,15 +10,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
+import com.example.fimeapp.ui.admin.ui.temario.MyItem
 import com.squareup.picasso.Picasso
 
 data class DetailItem(
-    val id: Int,
+    val id: String,
     val name: String,
-    val temario_id: Int,
+    val temario_id: String,
     val tipo: String,
-    val uri: String,
-    val asset: String,
     val external_link: String,
     var like: Boolean
 )
@@ -111,5 +110,10 @@ class DetailAdapter (
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun updateItems(newItems: List<DetailItem>) {
+        itemsFiltered = newItems
+        notifyDataSetChanged()
     }
 }

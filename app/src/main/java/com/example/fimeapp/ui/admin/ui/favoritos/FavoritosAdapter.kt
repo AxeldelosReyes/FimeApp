@@ -13,12 +13,10 @@ import com.example.fimeapp.R
 import com.example.fimeapp.ui.home.SpinnerItem
 
 data class FavDetailItem(
-    val id: Int,
+    val id: String,
     val name: String,
-    val temario_id: Int,
+    val temario_id: String,
     val tipo: String,
-    val uri: String,
-    val asset: String,
     val external_link: String,
     var like: Boolean
 )

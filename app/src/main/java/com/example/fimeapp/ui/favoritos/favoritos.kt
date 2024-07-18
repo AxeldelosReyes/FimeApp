@@ -55,7 +55,6 @@ class favoritos : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        databaseHelper = DBHelper(requireContext())
 
         current_user = Firebase.auth.currentUser
 
@@ -181,13 +180,6 @@ class favoritos : Fragment() {
     }
 
 
-    private fun isFavorite(id: Int): Boolean {
-        val db = databaseHelper.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM favoritos WHERE material_id=? and uuid=?", arrayOf(id.toString(), current_user?.uid ?: "prueba"))
-        val isFavorite = cursor.count > 0
-        cursor.close()
-        return isFavorite
-    }
 
     fun removeFavorite(item: FavDetailItem) {
         val db = databaseHelper.writableDatabase

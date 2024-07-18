@@ -22,6 +22,8 @@ import com.rajat.pdfviewer.util.saveTo
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.database.database
+import com.google.firebase.firestore.firestore
 
 
 class AdminMaterial : Fragment() {
@@ -53,7 +55,6 @@ class AdminMaterial : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        databaseHelper = DBHelper(requireContext())
 
         current_user = Firebase.auth.currentUser
 
@@ -68,13 +69,9 @@ class AdminMaterial : Fragment() {
         academia_name = requireArguments().getString("academia_name").toString()
 
 
-        // Read data from the table
-        items = databaseHelper.read("material", arrayOf("id",
-            "tipo","name","external_link","temario_id","asset","uri"),"temario_id= ?", arrayOf(temario_id.toString()), orderBy ="name").toMyItemList()
 
-        items.forEach { item ->
-            item.like = this.isFavorite(item.id)
-        }
+
+
 
     }
 
@@ -90,12 +87,17 @@ class AdminMaterial : Fragment() {
 
         iconAdd.setOnClickListener{
             val bundle = Bundle().apply {
-                putInt("academia", academia_id)
+                putString("academia", academia_id)
             }
             findNavController().navigate(R.id.action_adminMaterial_to_createMaterial, bundle)
 
 
         }
+
+
+        items = emptyList()
+
+        fetch_from_firebase_database("material")
 
         return view
 
@@ -127,26 +129,6 @@ class AdminMaterial : Fragment() {
                             enableDownload = true
                         )
                     )
-                } else if (item.uri.isNotEmpty()) {
-                    startActivity(
-                        PdfViewerActivity.launchPdfFromPath(
-                            context = this.context,
-                            path = item.uri,
-                            pdfTitle = item.name,
-                            saveTo = saveTo.ASK_EVERYTIME,
-                            fromAssets = false
-                        )
-                    )
-                } else {
-                    startActivity(
-                        PdfViewerActivity.launchPdfFromPath(
-                            context = this.context,
-                            path = item.asset,
-                            pdfTitle = item.name,
-                            saveTo = saveTo.ASK_EVERYTIME,
-                            fromAssets = true
-                        )
-                    )
                 }
             } else if (item.tipo == "video") {
                 findNavController().navigate(R.id.action_adminMaterial_to_youTubePlayerFragment2)
@@ -175,53 +157,117 @@ class AdminMaterial : Fragment() {
     private fun List<Map<String, Any?>>.toMyItemList(): List<DetailItem> {
         return this.map { map ->
             DetailItem(
-                id = map["id"] as Int,
+                id = map["id"] as String,
                 name = map["name"] as String,
                 external_link = (map["external_link"] ?: "").toString(),
                 tipo = map["tipo"] as String,
-                uri = (map["uri"] ?: "").toString(),
-                asset = (map["asset"] ?: "").toString(),
-                temario_id = map["temario_id"] as Int,
+                temario_id = map["temario_id"] as String,
                 like = false,
             )
         }
     }
 
 
-    private fun isFavorite(id: Int): Boolean {
-        val db = databaseHelper.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM favoritos WHERE material_id=? and uuid=?", arrayOf(id.toString(), current_user?.uid ?: "prueba"))
-        val isFavorite = cursor.count > 0
-        cursor.close()
-        return isFavorite
+    private fun isFavorite(item: DetailItem) {
+        val db = Firebase.firestore
+        var isFavorite = false
+        val query = db.collection("favoritos")
+            .whereEqualTo("material_id", item.id)
+            .whereEqualTo("uuid", current_user?.uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                isFavorite = doc.size() > 0
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+
+        item.like = isFavorite
     }
 
     fun toggleFavorite(item: DetailItem) {
-        val db = databaseHelper.writableDatabase
+        val db = Firebase.firestore
         if (item.like) {
-            // Insert into favoritos
-            val contentValues = ContentValues().apply {
-                put("material_id", item.id)
-                put("materia_id", materia_id)
-                put("academia_id", academia_id)
-                put("uuid", current_user?.uid ?: "prueba")
-            }
-            val newRowId = db.insert("favoritos", null, contentValues)
-            if (newRowId == -1L) {
-                Log.e("DB_INSERT", "Failed to insert item into favoritos")
-            } else {
-                Log.i("DB_INSERT", "Item inserted into favoritos with row ID: $newRowId")
-            }
+            val update = hashMapOf(
+                "material_id" to db.collection("material").document(item.id),
+                "uuid" to current_user?.uid,
+            )
+            db.collection("favoritos")
+                .add(update)
+                .addOnSuccessListener { documentReference ->
+                    Log.d("FirestoreAdd", "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("FirestoreAdd", "Error adding document", e)
+                }
 
         } else {
-            val rowsDeleted = db.delete("favoritos", "material_id=? and uuid=?", arrayOf(item.id.toString(), current_user?.uid  ?: "prueba"))
-            if (rowsDeleted == 0) {
-                Log.e("DB_DELETE", "Failed to delete item from favoritos")
-            } else {
-                Log.i("DB_DELETE", "Item deleted from favoritos")
-            }
+            db.collection("favoritos")
+                .whereEqualTo("material_id", db.collection("material").document(item.id))
+                .whereEqualTo("uuid", current_user?.uid)
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        db.collection("favoritos").document(document.id).delete()
+                    }
+                }
         }
     }
+
+
+    private fun fetch_from_firebase_database(table: String) {
+
+
+        val database = Firebase.firestore
+        val results = mutableListOf<Map<String, Any?>>()
+
+        when (table) {
+            "material" -> {
+                database.collection("material")
+                    .whereEqualTo("temario_id",database.collection("temario").document(temario_id))
+                    .orderBy("name")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (document in result) {
+                            val data = hashMapOf(
+                                "id" to document.id,
+                                "name" to document.data["name"] as String,
+                                "tipo" to document.data["tipo"] as String,
+                                "temario_id" to temario_id,
+                                "external_link" to document.data["external_link"] as String,
+                            )
+                            results.add(data)
+                        }
+                        val new_list = results.toMyItemList()
+
+                        new_list.forEach { item ->
+                            database.collection("favoritos")
+                                .whereEqualTo("material_id",  database.collection("material").document(item.id))
+                                .whereEqualTo("uuid", current_user?.uid)
+                                .get()
+                                .addOnSuccessListener { doc ->
+                                    item.like = doc.size() > 0
+                                    adapter.updateItems( new_list )
+                                    items = new_list
+                                }
+                                .addOnFailureListener { exception ->
+                                    item.like = false
+                                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                                }
+                        }
+
+
+
+
+                    }.addOnFailureListener { exception ->
+                        Log.w("FIREBASE", "Error getting documents: ", exception)
+                    }
+            }
+        }
+
+
+    }
+
 
 
 }
