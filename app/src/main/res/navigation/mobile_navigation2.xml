@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_adminTemario_to_adminMaterial"
             app:destination="@id/adminMaterial" />
+        <action
+            android:id="@+id/action_adminTemario_to_addTemario"
+            app:destination="@id/addTemario" />
     </fragment>
     <fragment
         android:id="@+id/adminMaterial"
@@ -48,4 +51,9 @@
         android:id="@+id/youTubePlayerFragment2"
         android:name="com.example.fimeapp.ui.material.YouTubePlayerFragment"
         android:label="YouTubePlayerFragment" />
+    <fragment
+        android:id="@+id/addTemario"
+        android:name="com.example.fimeapp.ui.admin.ui.temario.AddTemario"
+        android:label="fragment_add_temario"
+        tools:layout="@layout/fragment_add_temario" />
 </navigation>

@@ -56,7 +56,7 @@ class DetailAdapter (
 
         // Inflate the item layout and create the ViewHolder
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(context).inflate(R.layout.material_item, parent, false)
+            val view = LayoutInflater.from(context).inflate(R.layout.material_item_admin, parent, false)
             return ViewHolder(view)
         }
 

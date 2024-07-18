@@ -69,7 +69,7 @@ class AdminTemario : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val view = inflater.inflate(R.layout.fragment_temario, container, false)
+        val view = inflater.inflate(R.layout.fragment_temario_admin, container, false)
 
 
         // Set up the RecyclerView
@@ -103,15 +103,26 @@ class AdminTemario : Fragment() {
         // Set up the RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter = TemarioAdapter(requireContext(), items){ item ->
+        adapter = TemarioAdapter(requireContext(), items ,{ item ->
             val bundle = Bundle().apply {
                 putInt("temario", item.id)
                 putInt("plan", plan_id)
                 putInt("materia", materia_id)
                 putInt("academia", academia_id)
             }
-            findNavController().navigate(R.id.action_adminTemario_to_adminMaterial, bundle)
-        }
+                findNavController().navigate(R.id.action_adminTemario_to_adminMaterial, bundle)
+
+            }, {
+                item ->
+                val bundle = Bundle().apply {
+                    putInt("temario", item.id)
+                    putInt("plan", plan_id)
+                    putInt("materia", materia_id)
+                    putInt("academia", academia_id)
+                }
+                findNavController().navigate(R.id.action_adminTemario_to_addTemario, bundle)
+        } )
+
 
         recyclerView.adapter = adapter
 

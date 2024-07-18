@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
@@ -23,7 +24,8 @@ data class MyItem(
 class TemarioAdapter (
     private val context: Context,
     private val items: List<MyItem>,
-    private val itemClickListener: (MyItem) -> Unit
+    private val itemClickListener: (MyItem) -> Unit,
+    private val addButtonClickListener: (MyItem) -> Unit
     ) : RecyclerView.Adapter<TemarioAdapter.ViewHolder>(), Filterable {
 
         private var itemsFiltered: List<MyItem> = items
@@ -32,17 +34,20 @@ class TemarioAdapter (
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
             val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+            val linearLayout : LinearLayout = itemView.findViewById(R.id.linearLayout)
+            val addButton: View = itemView.findViewById(R.id.add_btn)
 
             fun bind(item: MyItem) {
                 textViewTitle.text = item.title
                 textViewDescription.text = item.description
-                itemView.setOnClickListener { itemClickListener(item) }
+                addButton.setOnClickListener { addButtonClickListener(item) }
+                linearLayout.setOnClickListener { itemClickListener(item) }
             }
         }
 
         // Inflate the item layout and create the ViewHolder
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(context).inflate(R.layout.temario_item, parent, false)
+            val view = LayoutInflater.from(context).inflate(R.layout.temario_item_admin, parent, false)
             return ViewHolder(view)
         }
 
