@@ -195,6 +195,7 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/iconAdd"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"

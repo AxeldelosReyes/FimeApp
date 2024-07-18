@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_adminTemario_to_addTemario"
             app:destination="@id/addTemario" />
+        <action
+            android:id="@+id/action_adminTemario_to_createTemario"
+            app:destination="@id/createTemario" />
     </fragment>
     <fragment
         android:id="@+id/adminMaterial"
@@ -56,4 +59,9 @@
         android:name="com.example.fimeapp.ui.admin.ui.temario.AddTemario"
         android:label="fragment_add_temario"
         tools:layout="@layout/fragment_add_temario" />
+    <fragment
+        android:id="@+id/createTemario"
+        android:name="com.example.fimeapp.ui.admin.ui.temario.CreateTemario"
+        android:label="fragment_create_temario"
+        tools:layout="@layout/fragment_create_temario" />
 </navigation>

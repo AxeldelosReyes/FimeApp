@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -84,7 +85,16 @@ class AdminTemario : Fragment() {
         materia_text.text = materia_name
         academia_text.text = academia_name
 
+        val iconAdd = view.findViewById<ImageView>(R.id.iconAdd)
 
+        iconAdd.setOnClickListener{
+            val bundle = Bundle().apply {
+                putInt("academia", academia_id)
+            }
+            findNavController().navigate(R.id.action_adminTemario_to_createTemario, bundle)
+
+
+        }
 
 
         return view
