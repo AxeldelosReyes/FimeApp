@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.ui.home.SpinnerItem
+import com.squareup.picasso.Picasso
 
 data class FavDetailItem(
     val id: Int,
@@ -46,6 +47,20 @@ class FavoritosAdapter (
                 imageView.setOnClickListener { itemClickListener(item) }
                 CircleView.setOnClickListener { itemClickListener(item) }
                 love.setBackgroundResource(if (item.like) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
+
+                val imageUrl = when (item.tipo) {
+                    "pdf" -> R.drawable.icon_pdf
+                    "video" -> R.drawable.icon_video
+                    else -> null
+                }
+
+                imageUrl?.let {
+                    Picasso.get()
+                        .load(it)
+                        .resize(100, 100)
+                        .centerInside()
+                        .into(imageView)
+                }
 
                 love.setOnClickListener {
                     item.like = !item.like

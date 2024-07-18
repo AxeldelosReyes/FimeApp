@@ -48,5 +48,26 @@ class Admin : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+
+            when (destination.id) {
+                R.id.navigation_home_admin -> {
+                    navView.menu.findItem(R.id.navigation_home_admin).isChecked = true
+                }
+                R.id.navigation_dashboard_admin -> {
+                    navView.menu.findItem(R.id.navigation_dashboard_admin).isChecked = true
+                }
+                R.id.navigation_favoritos_admin -> {
+                    navView.menu.findItem(R.id.navigation_favoritos_admin).isChecked = true
+                }
+                else -> {
+                    navView.menu.findItem(R.id.navigation_home_admin).isChecked = true
+                }
+            }
+        }
+
+
     }
 }

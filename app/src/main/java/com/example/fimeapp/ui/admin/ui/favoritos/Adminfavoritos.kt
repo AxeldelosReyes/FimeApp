@@ -71,7 +71,7 @@ class AdminFavoritos : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_favoritos, container, false)
+        val view = inflater.inflate(R.layout.fragment_favoritos_admin, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
         return view
@@ -101,8 +101,7 @@ class AdminFavoritos : Fragment() {
         }, { item ->
             // Handle toggle favorite
             this.removeFavorite(item)
-            val new_items = items.filter { it.id != item.id }
-            adapter.updateItems(new_items)
+
 
 
         })
@@ -166,6 +165,9 @@ class AdminFavoritos : Fragment() {
                 for (document in result) {
                     db.collection("favoritos").document(document.id).delete()
                 }
+                val new_items = items.filter { it.id != item.id }
+                adapter.updateItems(new_items)
+                items  = new_items
             }
 
     }
@@ -211,6 +213,7 @@ class AdminFavoritos : Fragment() {
                                         )
                                         new_results.add(new_data)
                                         adapter.updateItems(new_results)
+                                        items = new_results
 
                                 }
                                 .addOnFailureListener { exception ->

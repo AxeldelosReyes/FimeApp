@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.ui.temario.AddTemario">
+    tools:context=".ui.admin.ui.temario.CreateTemario">
 
     <ImageView
         android:layout_width="match_parent"
@@ -239,6 +239,7 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/iconSave"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"
@@ -284,13 +285,13 @@
 
         </com.google.android.material.textfield.TextInputEditText>
 
-<!--        <EditText-->
-<!--            android:id="@+id/urlInput"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="text"-->
-<!--            android:text="Name" />-->
+        <EditText
+            android:id="@+id/urlInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
 
         <Button
             android:id="@+id/select_image_button"

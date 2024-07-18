@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.ui.home.SpinnerItem
+import com.squareup.picasso.Picasso
 
 data class FavDetailItem(
     val id: String,
@@ -50,12 +51,27 @@ class FavoritosAdapter (
                     toggleFavorite(item)
                     notifyItemRemoved(position)
                 }
+
+                val imageUrl = when (item.tipo) {
+                    "pdf" -> R.drawable.icon_pdf
+                    "video" -> R.drawable.icon_video
+                    else -> null
+                }
+
+                imageUrl?.let {
+                    Picasso.get()
+                        .load(it)
+                        .resize(100, 100)
+                        .centerInside()
+                        .into(imageView)
+                }
+
             }
         }
 
         // Inflate the item layout and create the ViewHolder
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(context).inflate(R.layout.material_item, parent, false)
+            val view = LayoutInflater.from(context).inflate(R.layout.material_item_admin, parent, false)
             return ViewHolder(view)
         }
 

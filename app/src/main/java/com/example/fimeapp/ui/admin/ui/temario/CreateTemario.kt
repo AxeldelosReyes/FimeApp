@@ -14,6 +14,7 @@ import android.net.Uri
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatImageView
 import com.example.fimeapp.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.database.database
 import com.google.firebase.firestore.firestore
 
 
@@ -80,7 +82,26 @@ class CreateTemario : Fragment() {
         view.findViewById<Button>(R.id.select_image_button).setOnClickListener {
             selectImageFromGallery()
         }
-//        urlInput = view.findViewById(R.id.urlInput)
+
+
+
+
+        view.findViewById<AppCompatImageView>(R.id.iconSave).setOnClickListener {
+
+            val nombre =  view.findViewById<TextInputEditText>(R.id.addTittle).text.toString()
+            val descripcion =  view.findViewById<TextInputEditText>(R.id.addText).text.toString()
+
+
+
+            savetoFirebase(hashMapOf(
+                "imagen_url" to urlInput.text.toString(),
+                "materia" to Firebase.firestore.collection("materias").document(materia_id),
+                "name" to  nombre,
+                "descripcion" to descripcion
+
+            ))
+        }
+        urlInput = view.findViewById(R.id.urlInput)
 
         return view
     }
@@ -104,9 +125,11 @@ class CreateTemario : Fragment() {
             imagesRef.downloadUrl
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                 this.downloadUri = task.result.toString()
+                downloadUri = task.result.toString()
+
 //                this.urlInput.text = downloadUri.toString()
                 saveImageUrlToDatabase(downloadUri.toString())
+                urlInput.setText(downloadUri.toString())
             } else {
                 // Handle failures
             }
@@ -117,5 +140,18 @@ class CreateTemario : Fragment() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("images")
         myRef.push().setValue(imageUrl)
+    }
+
+
+    private fun savetoFirebase(vals : HashMap<String, Any>) {
+
+        val db = Firebase.firestore
+
+        db.collection("temario").add(vals).addOnSuccessListener {
+           requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+            .addOnFailureListener { e ->
+                Log.w("TAG", "Error adding document", e)
+        }
     }
 }
