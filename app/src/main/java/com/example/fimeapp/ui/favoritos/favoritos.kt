@@ -56,6 +56,8 @@ class favoritos : Fragment() {
         super.onCreate(savedInstanceState)
 
 
+
+        databaseHelper = DBHelper(requireContext())
         current_user = Firebase.auth.currentUser
 
 

@@ -103,10 +103,10 @@ class AdminMaterial : Fragment() {
         }
 
         // Configurar el OnClickListener para el botón de eliminar
-        val iconDelete = view.findViewById<ImageView>(R.id.iconDelete)
-        iconDelete.setOnClickListener {
-            deleteContent()
-        }
+//        val iconDelete = view.findViewById<View>(R.id.iconDelete)
+//        iconDelete.setOnClickListener {
+//            deleteContent()
+//        }
 
 
         items = emptyList()
