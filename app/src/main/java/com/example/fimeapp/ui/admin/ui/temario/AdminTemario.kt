@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -69,7 +70,7 @@ class AdminTemario : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val view = inflater.inflate(R.layout.fragment_temario, container, false)
+        val view = inflater.inflate(R.layout.fragment_temario_admin, container, false)
 
 
         // Set up the RecyclerView
@@ -84,7 +85,16 @@ class AdminTemario : Fragment() {
         materia_text.text = materia_name
         academia_text.text = academia_name
 
+        val iconAdd = view.findViewById<ImageView>(R.id.iconAdd)
 
+        iconAdd.setOnClickListener{
+            val bundle = Bundle().apply {
+                putInt("academia", academia_id)
+            }
+            findNavController().navigate(R.id.action_adminTemario_to_createTemario, bundle)
+
+
+        }
 
 
         return view
@@ -103,15 +113,26 @@ class AdminTemario : Fragment() {
         // Set up the RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter = TemarioAdapter(requireContext(), items){ item ->
+        adapter = TemarioAdapter(requireContext(), items ,{ item ->
             val bundle = Bundle().apply {
                 putInt("temario", item.id)
                 putInt("plan", plan_id)
                 putInt("materia", materia_id)
                 putInt("academia", academia_id)
             }
-            findNavController().navigate(R.id.action_adminTemario_to_adminMaterial, bundle)
-        }
+                findNavController().navigate(R.id.action_adminTemario_to_adminMaterial, bundle)
+
+            }, {
+                item ->
+                val bundle = Bundle().apply {
+                    putInt("temario", item.id)
+                    putInt("plan", plan_id)
+                    putInt("materia", materia_id)
+                    putInt("academia", academia_id)
+                }
+                findNavController().navigate(R.id.action_adminTemario_to_addTemario, bundle)
+        } )
+
 
         recyclerView.adapter = adapter
 

@@ -38,12 +38,8 @@ class AdminHomeFragment : Fragment() {
         _binding = FragmentHomeAdminBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-        if (savedInstanceState == null){
-            setupLogin()
-            setupSpinners()
-        }
-
+        setupLogin()
+        setupSpinners()
 
         return root
     }

@@ -79,7 +79,7 @@ class AdminMaterial : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_material, container, false)
+        val view = inflater.inflate(R.layout.fragment_material_admin, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
         return view
