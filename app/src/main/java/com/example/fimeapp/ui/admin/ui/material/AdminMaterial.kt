@@ -1,5 +1,6 @@
 package com.example.fimeapp.ui.admin.ui.material
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -75,6 +76,7 @@ class AdminMaterial : Fragment() {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -98,6 +100,12 @@ class AdminMaterial : Fragment() {
             findNavController().navigate(R.id.action_adminMaterial_to_createMaterial, bundle)
 
 
+        }
+
+        // Configurar el OnClickListener para el botón de eliminar
+        val iconDelete = view.findViewById<ImageView>(R.id.iconDelete)
+        iconDelete.setOnClickListener {
+            deleteContent()
         }
 
 
@@ -272,6 +280,36 @@ class AdminMaterial : Fragment() {
         }
 
 
+    }
+
+    private fun deleteContent() {
+        // Vacía la lista de elementos en el RecyclerView
+        items = emptyList()
+        adapter.updateItems(items)
+
+        // Referencia a Firestore
+        val db = Firebase.firestore
+
+        db.collection("material")
+            .whereEqualTo("temario_id", temario_id)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    db.collection("material").document(document.id).delete()
+                        .addOnSuccessListener {
+                            Log.d("FIREBASE", "DocumentSnapshot successfully deleted!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("FIREBASE", "Error deleting document", e)
+                        }
+                }
+                // Actualiza el adaptador después de eliminar los datos
+                items = emptyList()
+                adapter.updateItems(items)
+            }
+            .addOnFailureListener { exception ->
+                Log.w("FIREBASE", "Error getting documents: ", exception)
+            }
     }
 
 
