@@ -76,7 +76,7 @@
         android:id="@+id/add_btn"
         android:layout_gravity="bottom|end"
         android:layout_width="40dp"
-        android:background="@drawable/rounded_shape"
+        android:background="@drawable/rounded_shape_green"
         android:radius="20dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
@@ -87,7 +87,6 @@
             android:layout_gravity="end"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:backgroundTint="@color/green_img"
             android:background="@drawable/baseline_edit_24">
 
         </View>
