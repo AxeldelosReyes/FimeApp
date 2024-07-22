@@ -77,7 +77,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal">
 
-            <View
+            <ImageView
                 android:id="@+id/delete"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
