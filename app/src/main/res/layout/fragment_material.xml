@@ -120,6 +120,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Plan"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -147,6 +148,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Academia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -190,6 +192,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Materia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />

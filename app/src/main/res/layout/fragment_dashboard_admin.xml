@@ -136,10 +136,12 @@
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_shape_profile_icon"
                     android:elevation="4dp"
+                    android:textSize="17dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:text="Datos Personales" />
+                    android:text="Datos Personales"
+                    android:fontFamily="@font/roboto_medium"/>
 
             </LinearLayout>
 
@@ -155,6 +157,7 @@
 
                 <TextView
                     android:id="@+id/textRol"
+                    android:fontFamily="@font/roboto_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -169,6 +172,7 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Nombre"
+                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -178,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="Apellidos"
+                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -187,6 +192,7 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Correo"
+                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
 
@@ -199,6 +205,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="Cerrar sesión "
+                    android:fontFamily="@font/roboto_medium"
                     android:textSize="16sp" />
 
 

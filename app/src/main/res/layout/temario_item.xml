@@ -52,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:fontFamily="@font/roboto_medium"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Sample Title" />
@@ -62,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Description"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="14sp"
                 tools:text="Sample Description" />
         </LinearLayout>

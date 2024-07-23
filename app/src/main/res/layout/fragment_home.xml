@@ -129,6 +129,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="ACEPTAR"
+            android:fontFamily="@font/roboto_medium"
             android:layout_marginStart="55dp"
             android:textSize="18sp"
             style="@style/GreenButton" />

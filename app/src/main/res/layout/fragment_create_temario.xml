@@ -118,6 +118,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Plan"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -145,6 +146,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Academia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -188,6 +190,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Materia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -220,6 +223,7 @@
                 android:background="@drawable/shadow_background_icons_green"
                 android:gravity="center"
                 android:text="ADMIN"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -270,7 +274,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Agregar título aquí"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="text|textMultiLine"
+            android:ems="10"
             android:textAlignment="center"
             android:textColorHint="#000000" />
 
@@ -279,6 +285,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Agregar texto aquí"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="text|textMultiLine"
             android:textAlignment="center"
             android:minHeight="200dp"
@@ -292,14 +299,16 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Name" />
+            android:text="Name"
+            android:fontFamily="@font/roboto_regular"/>
 
         <Button
             android:id="@+id/select_image_button"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Agregar una imagen" />
+            android:text="Agregar una imagen"
+            android:fontFamily="@font/roboto_medium"/>
     </LinearLayout>
 
     <LinearLayout
