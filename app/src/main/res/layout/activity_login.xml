@@ -59,12 +59,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Estudiante"
+                    android:fontFamily="@font/roboto_medium"
                     android:checked="true" />
 
                 <RadioButton
                     android:id="@+id/radioEmployee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Empleado" />
             </RadioGroup>
 
@@ -85,6 +87,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Correo"
+                        android:fontFamily="@font/roboto_medium"
                         android:inputType="textEmailAddress"
                         android:textColorHint="#000000"
                         android:backgroundTint="#000000"
@@ -106,6 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contraseña"
+                        android:fontFamily="@font/roboto_medium"
                         android:inputType="textPassword"
                         android:textColorHint="#000000"
                         android:backgroundTint="#000000"
@@ -124,6 +128,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="INGRESAR"
+                android:fontFamily="@font/roboto_medium"
                 android:textSize="18sp"
                 style="@style/GreenButton"
                 android:layout_marginBottom="16dp" />
