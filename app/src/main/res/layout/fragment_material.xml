@@ -230,6 +230,21 @@
 
     </SearchView>
 
+    <TextView
+        android:id="@+id/noFilesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:text="No hay archivos aún"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="#66000000"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDetail"
         android:layout_width="match_parent"

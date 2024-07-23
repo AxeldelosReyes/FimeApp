@@ -35,6 +35,7 @@ class AdminMaterial : Fragment() {
     private lateinit var adapter: DetailAdapter
     private lateinit var items: List<DetailItem>
     private lateinit var searchView: SearchView
+    private lateinit var noFilesText: TextView
 
     private var current_user: FirebaseUser? = null
     private var plan_id: String = ""
@@ -80,6 +81,7 @@ class AdminMaterial : Fragment() {
         val view = inflater.inflate(R.layout.fragment_material_admin, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
+        noFilesText = view.findViewById(R.id.noFilesText)
 
         val iconAdd = view.findViewById<ImageView>(R.id.iconAdd)
 
@@ -221,8 +223,6 @@ class AdminMaterial : Fragment() {
 
 
     private fun fetch_from_firebase_database(table: String) {
-
-
         val database = Firebase.firestore
         val results = mutableListOf<Map<String, Any?>>()
 
@@ -243,34 +243,35 @@ class AdminMaterial : Fragment() {
                             )
                             results.add(data)
                         }
-                        val new_list = results.toMyItemList()
 
-                        new_list.forEach { item ->
-                            database.collection("favoritos")
-                                .whereEqualTo(
-                                    "material_id",
-                                    database.collection("material").document(item.id)
-                                )
-                                .whereEqualTo("uuid", current_user?.uid)
-                                .get()
-                                .addOnSuccessListener { doc ->
-                                    item.like = doc.size() > 0
-                                    adapter.updateItems(new_list)
-                                    items = new_list
-                                }
-                                .addOnFailureListener { exception ->
-                                    item.like = false
-                                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                                }
+                        if (results.isEmpty()) {
+                            noFilesText.visibility = View.VISIBLE
+                        } else {
+                            noFilesText.visibility = View.GONE
+                            val new_list = results.toMyItemList()
+
+                            new_list.forEach { item ->
+                                database.collection("favoritos")
+                                    .whereEqualTo("material_id", database.collection("material").document(item.id))
+                                    .whereEqualTo("uuid", current_user?.uid)
+                                    .get()
+                                    .addOnSuccessListener { doc ->
+                                        item.like = doc.size() > 0
+                                        adapter.updateItems(new_list)
+                                        items = new_list
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        item.like = false
+                                        Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                                    }
+                            }
                         }
-
-
-                    }.addOnFailureListener { exception ->
+                    }
+                    .addOnFailureListener { exception ->
                         Log.w("FIREBASE", "Error getting documents: ", exception)
                     }
             }
         }
-
-
     }
+
 }

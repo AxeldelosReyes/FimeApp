@@ -31,6 +31,7 @@ class material : Fragment() {
     private lateinit var adapter: DetailAdapter
     private lateinit var items: List<DetailItem>
     private lateinit var searchView: SearchView
+    private lateinit var noFilesText: TextView
 
     private var current_user: FirebaseUser? = null
     private var temario_id = 0
@@ -83,6 +84,7 @@ class material : Fragment() {
         val view = inflater.inflate(R.layout.fragment_material, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
+        noFilesText = view.findViewById(R.id.noFilesText)
         return view
 
     }
@@ -98,7 +100,11 @@ class material : Fragment() {
         materia_text.text = materia_name
         academia_text.text = academia_name
 
-
+        if (items.isEmpty()) {
+            noFilesText.visibility = View.VISIBLE
+        } else {
+            noFilesText.visibility = View.GONE
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = DetailAdapter(requireContext(), items, { item ->
