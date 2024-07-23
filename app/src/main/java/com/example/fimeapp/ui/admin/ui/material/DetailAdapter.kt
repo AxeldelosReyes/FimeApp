@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
 import com.example.fimeapp.ui.admin.ui.temario.MyItem
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
 import com.squareup.picasso.Picasso
 
 data class DetailItem(
@@ -38,6 +41,7 @@ class DetailAdapter (
             val imageView: ImageView = itemView.findViewById(R.id.imageViewMaterial)
             val CircleView: View = itemView.findViewById(R.id.circleView)
             val love: View = itemView.findViewById(R.id.love)
+            val delete: ImageView = itemView.findViewById(R.id.delete)
 
             fun bind(item: DetailItem, position: Int) {
                 textViewDescription.text = item.name
@@ -48,6 +52,15 @@ class DetailAdapter (
                     item.like = !item.like
                     toggleFavorite(item)
                     notifyItemChanged(position)
+                }
+                delete.setOnClickListener {
+                    val db = Firebase.firestore
+                    val current_user = FirebaseAuth.getInstance().currentUser
+
+                    db.collection("material").document(item.id).delete()
+                        .addOnSuccessListener { result ->
+                            notifyItemChanged(position)
+                        }
                 }
                 // Update love view based on item's like status
                 love.setBackgroundResource(if (item.like) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
