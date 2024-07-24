@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 //    id("com.android.application")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -71,4 +72,7 @@ dependencies {
     implementation(platform(libs.firebase.bom.v3280))
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx.v242)
+    kapt(libs.androidx.room.compiler)
 }

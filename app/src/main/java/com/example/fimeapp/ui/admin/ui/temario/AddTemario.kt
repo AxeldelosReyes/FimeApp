@@ -16,6 +16,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class AddTemario : Fragment() {
 
@@ -95,15 +99,20 @@ class AddTemario : Fragment() {
         }
 
         view.findViewById<ImageView>(R.id.iconDelete).setOnClickListener {
+            Firebase.firestore.disableNetwork().addOnCompleteListener {
 
+            }
             val db = Firebase.firestore
-            val current_user = FirebaseAuth.getInstance().currentUser
 
             db.collection("temario").document(temario_id).delete()
-                .addOnSuccessListener { result ->
-                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                .addOnSuccessListener {
 
                 }
+            activity?.onBackPressedDispatcher?.onBackPressed()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                Firebase.firestore.enableNetwork().await()
+            }
         }
 
 
@@ -111,38 +120,54 @@ class AddTemario : Fragment() {
     }
 
     private fun fetch_from_firebase_database(table: String) {
+         Firebase.firestore.disableNetwork().addOnCompleteListener {
+            when (table) {
+                "temario" -> {
+                    Firebase.firestore.collection("temario")
+                        .document(temario_id)
+                        .get()
+                        .addOnSuccessListener { result ->
+                            descripcion?.setText(result.get("descripcion").toString())
+                            nombre?.setText(result.get("name").toString())
+                            urlInput?.setText(result.get("imagen_url").toString())
 
-        val database = Firebase.firestore
-
-        when (table) {
-            "temario" -> {
-                database.collection("temario")
-                    .document(temario_id)
-                    .get()
-                    .addOnSuccessListener { result ->
-                        descripcion?.setText(result.get("descripcion").toString())
-                        nombre?.setText(result.get("name").toString())
-                        urlInput?.setText(result.get("imagen_url").toString())
-
-                    }.addOnFailureListener { exception ->
-                        Log.w("FIREBASE", "Error getting documents: ", exception)
-                    }
+                        }.addOnFailureListener { exception ->
+                            Log.w("FIREBASE", "Error getting documents: ", exception)
+                        }
+                }
             }
-        }
+             CoroutineScope(Dispatchers.IO).launch {
+                 Firebase.firestore.enableNetwork().await()
+             }
 
+        }
 
     }
 
     private fun savetoFirebase(vals : HashMap<String, Any>) {
 
-        val db = Firebase.firestore
+        Firebase.firestore.disableNetwork().addOnCompleteListener {
+            val db = Firebase.firestore
+            db.collection("temario").document(temario_id).set(vals).addOnSuccessListener {
+            }.addOnFailureListener { e ->
+                    Log.w("TAG", "Error adding document", e)
+                }
+            activity?.onBackPressedDispatcher?.onBackPressed()
 
-        db.collection("temario").document(temario_id).set(vals).addOnSuccessListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
-            .addOnFailureListener { e ->
-                Log.w("TAG", "Error adding document", e)
+            CoroutineScope(Dispatchers.IO).launch {
+                try{
+                    Firebase.firestore.enableNetwork().await()
+                    Log.d("TAG", "Network re-enabled successfully after failure")
+                } catch (e: Exception) {
+                    Log.w("TAG", "Error re-enabling network after failure", e)
+                }
             }
+        }
+
+
+
+
+
     }
 
 

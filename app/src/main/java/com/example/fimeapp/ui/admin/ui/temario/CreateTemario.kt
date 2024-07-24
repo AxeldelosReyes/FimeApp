@@ -24,6 +24,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class CreateTemario : Fragment() {
@@ -150,14 +153,24 @@ class CreateTemario : Fragment() {
 
 
     private fun savetoFirebase(vals : HashMap<String, Any>) {
+        Firebase.firestore.disableNetwork().addOnCompleteListener {
+            val db = Firebase.firestore
 
-        val db = Firebase.firestore
+            db.collection("temario").add(vals).addOnSuccessListener {
+            }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error adding document", e)
+                }
+            activity?.onBackPressedDispatcher?.onBackPressed()
+            CoroutineScope(Dispatchers.IO).launch {
+            try{
+                    Firebase.firestore.enableNetwork().await()
+                    Log.d("TAG", "Network re-enabled successfully after failure")
+                } catch (e: Exception) {
+                    Log.w("TAG", "Error re-enabling network after failure", e)
+                }
+            }
+        }
 
-        db.collection("temario").add(vals).addOnSuccessListener {
-           requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
-            .addOnFailureListener { e ->
-                Log.w("TAG", "Error adding document", e)
-        }
     }
 }

@@ -26,9 +26,14 @@ picasso = "2.8"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.0.0"
 firebaseDatabaseKtx = "21.0.0"
+roomKtxVersion = "2.6.1"
+roomRuntime = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtxVersion" }
+androidx-room-ktx-v242 = { module = "androidx.room:room-ktx", version.ref = "roomKtxVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 core = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "core" }
 custom-ui = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui", version.ref = "core" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }

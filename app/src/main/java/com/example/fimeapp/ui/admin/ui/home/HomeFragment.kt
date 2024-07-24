@@ -17,6 +17,9 @@ import com.example.fimeapp.Home
 import com.example.fimeapp.R
 import com.example.fimeapp.databinding.FragmentHomeAdminBinding
 import com.example.fimeapp.db_manager.DBHelper
+import com.example.fimeapp.firebase_data.AppDatabase
+import com.example.fimeapp.firebase_data.TemarioDao
+import com.example.fimeapp.firebase_data.AcademiaDao
 import com.example.fimeapp.ui.admin.Admin
 import com.example.fimeapp.ui.admin.ui.home.CustomSpinnerAdapter
 import com.example.fimeapp.ui.admin.ui.home.HomeViewModel
@@ -24,13 +27,14 @@ import com.example.fimeapp.ui.admin.ui.home.SpinnerItem
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AdminHomeFragment : Fragment() {
 
-    private var CachePlan = mutableListOf<SpinnerItem>()
-    private var CacheAcademias = mutableListOf<SpinnerItem>()
-    private var CacheMateria = mutableListOf<SpinnerItem>()
-
+    private lateinit var academiaDao: AcademiaDao
+    private lateinit var database: AppDatabase
 
 
 
@@ -51,10 +55,24 @@ class AdminHomeFragment : Fragment() {
         _binding = FragmentHomeAdminBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         setupLogin()
         setupSpinners()
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        database = AppDatabase.getDatabase(requireContext())
+        academiaDao = database.academiaDao()
+
+        // Example: Fetch all plans and print them
+        CoroutineScope(Dispatchers.IO).launch {
+            println(academiaDao.getAll())
+        }
     }
 
     private fun setupLogin() {
@@ -144,40 +162,6 @@ class AdminHomeFragment : Fragment() {
         }
     }
 
-
-    private fun update_materia_items() {
-        val selectedPlan =  binding.spinnerPlan.selectedItem
-        val selectedAcademia =  binding.spinnerAcademia.selectedItem as SpinnerItem
-        val db = databaseHelper.readableDatabase
-
-        val materiasList = mutableListOf<SpinnerItem>()
-
-        materiasList += DEFAULT_MATERIA
-        // Safely query the database
-        var cursor: Cursor? = null
-        Log.d("DB", "TEST")
-        try {
-            cursor = db.rawQuery("select m.id,m.name from materias_academias_rel mar " +
-                    "left join academias a on mar.academia_id = a.id " +
-                    "left join materias m on mar.materia_id = m.id " +
-                    "where a.id = ? order by m.name", arrayOf(selectedAcademia.id.toString()))
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
-                    val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-                    val spinnerItem = SpinnerItem(id.toString(), name)
-                    materiasList.add(spinnerItem)
-                }
-            }
-        } catch (e: SQLException) {
-            Log.e("DB", "Query failed", e)
-        } finally {
-            cursor?.close()
-        }
-        val materiaAdaptor = binding.spinnerMateria.adapter as CustomSpinnerAdapter
-        materiaAdaptor.updateItems(materiasList)
-
-    }
 
     private fun resetSpinner(spinner: Spinner) {
         spinner.setSelection(0)
