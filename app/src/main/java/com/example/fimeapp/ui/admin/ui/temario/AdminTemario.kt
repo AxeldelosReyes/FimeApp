@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
-import com.example.fimeapp.db_manager.DBHelper
 import com.example.fimeapp.ui.admin.ui.home.CustomSpinnerAdapter
 import com.example.fimeapp.ui.admin.ui.home.SpinnerItem
 import com.google.firebase.Firebase

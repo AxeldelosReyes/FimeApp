@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.fimeapp.Home
 import com.example.fimeapp.R
 import com.example.fimeapp.databinding.FragmentHomeAdminBinding
-import com.example.fimeapp.db_manager.DBHelper
 import com.example.fimeapp.ui.admin.Admin
 import com.example.fimeapp.ui.admin.ui.home.CustomSpinnerAdapter
 import com.example.fimeapp.ui.admin.ui.home.HomeViewModel
@@ -29,7 +28,6 @@ class AdminHomeFragment : Fragment() {
 
 
     private var _binding: FragmentHomeAdminBinding? = null
-    private lateinit var databaseHelper: DBHelper
     private val binding get() = _binding!!
     private val DEFAULT_MATERIA = listOf(SpinnerItem(id = "0", name = "Materia"))
     private val DEFAULT_ACADEMIA = listOf(SpinnerItem(id = "0", name = "Academia"))
@@ -79,7 +77,6 @@ class AdminHomeFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        databaseHelper = DBHelper(requireContext())
         // Initialize spinners with default values
         setSpinners()
         setSpinnerListeners()

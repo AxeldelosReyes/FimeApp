@@ -9,7 +9,6 @@ import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.fimeapp.R
-import com.example.fimeapp.db_manager.DBHelper
 
 data class SpinnerItem(val id: String, val name: String)
 

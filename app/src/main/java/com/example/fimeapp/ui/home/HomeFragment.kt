@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.fimeapp.R
 import com.example.fimeapp.databinding.FragmentHomeBinding
-import com.example.fimeapp.db_manager.DBHelper
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
@@ -23,7 +22,6 @@ class HomeFragment : Fragment() {
 
 
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var databaseHelper: DBHelper
     private val binding get() = _binding!!
     private val DEFAULT_MATERIA = listOf(SpinnerItem(id = "0", name = "Materia"))
     private val DEFAULT_ACADEMIA = listOf(SpinnerItem(id = "0", name = "Academia"))
@@ -73,7 +71,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        databaseHelper = DBHelper(requireContext())
         // Initialize spinners with default values
         setSpinners()
         setSpinnerListeners()

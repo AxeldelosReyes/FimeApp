@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
-import com.example.fimeapp.db_manager.DBHelper
 import com.rajat.pdfviewer.PdfViewerActivity
 import com.rajat.pdfviewer.util.saveTo
 
@@ -30,7 +29,6 @@ import com.google.firebase.firestore.firestore
 
 class AdminMaterial : Fragment() {
 
-    private lateinit var databaseHelper: DBHelper
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DetailAdapter
     private lateinit var items: List<DetailItem>

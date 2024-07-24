@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fimeapp.R
-import com.example.fimeapp.db_manager.DBHelper
 import com.example.fimeapp.ui.admin.ui.material.MaterialViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
@@ -39,7 +38,6 @@ class AdminFavoritos : Fragment() {
         fun newInstance() = AdminFavoritos()
     }
 
-    private lateinit var databaseHelper: DBHelper
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FavoritosAdapter
     private lateinit var items: List<FavDetailItem>
@@ -52,7 +50,6 @@ class AdminFavoritos : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        databaseHelper = DBHelper(requireContext())
 
         current_user = Firebase.auth.currentUser
 
