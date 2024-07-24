@@ -106,7 +106,7 @@ class material : Fragment() {
             if (item.tipo == "pdf") {
                 if (item.external_link.isNotEmpty()) {
                     startActivity(
-                        PdfViewerActivity.launchPdfFromUrl(
+                        PdfViewerActivityPatched.launchPdfFromUrl(
                             context = this.context, pdfUrl = item.external_link,
                             pdfTitle = item.name, saveTo = saveTo.ASK_EVERYTIME,
                             enableDownload = true
@@ -114,7 +114,7 @@ class material : Fragment() {
                     )
                 } else if (item.uri.isNotEmpty()) {
                     startActivity(
-                        PdfViewerActivity.launchPdfFromPath(
+                        PdfViewerActivityPatched.launchPdfFromPath(
                             context = this.context,
                             path = item.uri,
                             pdfTitle = item.name,
@@ -124,7 +124,7 @@ class material : Fragment() {
                     )
                 } else {
                     startActivity(
-                        PdfViewerActivity.launchPdfFromPath(
+                        PdfViewerActivityPatched.launchPdfFromPath(
                             context = this.context,
                             path = item.asset,
                             pdfTitle = item.name,
