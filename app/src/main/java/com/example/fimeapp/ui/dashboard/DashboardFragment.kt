@@ -1,8 +1,14 @@
 package com.example.fimeapp.ui.dashboard
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Html
+import android.text.Spannable
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +45,7 @@ class DashboardFragment : Fragment() {
 
             Log.d(TAG, "Usuario autenticado UID: $userId")
 
-            binding.textCorreo.text = "Correo: $email"
+            binding.textCorreo.text = formatTextWithHtml("Correo: ", email)
 
             // Get additional user data from Firestore
             val db = Firebase.firestore
@@ -53,21 +59,21 @@ class DashboardFragment : Fragment() {
 
                         Log.d(TAG, "Nombre: $nombre, Apellido: $apellido, Rol: $rol")
 
-                        binding.textNombre.text = "Nombre: $nombre"
-                        binding.textApellidos.text = "Apellidos: $apellido"
-                        binding.textRol.text = "Rol: $rol"
+                        binding.textNombre.text = formatTextWithHtml("Nombre: ", nombre)
+                        binding.textApellidos.text = formatTextWithHtml("Apellidos: ", apellido)
+                        binding.textRol.text = formatTextWithHtml("Rol: ", rol)
                     } else {
                         Log.w(TAG, "Documento de usuario no encontrado")
-                        binding.textNombre.text = "Nombre: no disponible"
-                        binding.textApellidos.text = "Apellidos: no disponible"
-                        binding.textRol.text = "Rol: no disponible"
+                        binding.textNombre.text = formatTextWithHtml("Nombre: ", "no disponible")
+                        binding.textApellidos.text = formatTextWithHtml("Apellidos: ", "no disponible")
+                        binding.textRol.text = formatTextWithHtml("Rol: ", "no disponible")
                     }
                 }
                 .addOnFailureListener { exception ->
                     Log.e(TAG, "Error al obtener el documento de usuario", exception)
-                    binding.textNombre.text = "Nombre: Error al obtener"
-                    binding.textApellidos.text = "Apellidos: Error al obtener"
-                    binding.textRol.text = "Rol: Error al obtener"
+                    binding.textNombre.text = formatTextWithHtml("Nombre: ", "Error al obtener")
+                    binding.textApellidos.text = formatTextWithHtml("Apellidos: ", "Error al obtener")
+                    binding.textRol.text = formatTextWithHtml("Rol: ", "Error al obtener")
                 }
         }
 
@@ -83,6 +89,11 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun formatTextWithHtml(label: String, value: String): Spanned {
+        val htmlText = "<b>$label</b>$value"
+        return Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
     }
     
 }

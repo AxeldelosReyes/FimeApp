@@ -143,6 +143,7 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:fontFamily="@font/roboto_medium"
+                    android:textStyle="bold"
                     android:text="Datos Personales" />
 
 
@@ -165,7 +166,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Rol"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -175,7 +175,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Nombre"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -185,7 +184,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="Apellidos"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -195,7 +193,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Correo"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
 

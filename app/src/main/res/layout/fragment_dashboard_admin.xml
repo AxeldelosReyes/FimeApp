@@ -157,7 +157,7 @@
 
                 <TextView
                     android:id="@+id/textRol"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -172,7 +172,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Nombre"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -182,7 +181,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="Apellidos"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
                 <TextView
@@ -192,7 +190,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="20dp"
                     android:text="Correo"
-                    android:fontFamily="@font/roboto_regular"
                     android:textSize="20dp" />
 
 
