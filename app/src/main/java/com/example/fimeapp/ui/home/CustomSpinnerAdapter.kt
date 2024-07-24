@@ -5,19 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.fimeapp.R
-import com.example.fimeapp.db_manager.DBHelper
 
-data class SpinnerItem(val id: Int, val name: String)
+data class SpinnerItem(val id: String, val name: String)
 
 class CustomSpinnerAdapter(
     context: Context,
     private val items: List<SpinnerItem>,
     private val iconResId: Int,
 ) : ArrayAdapter<SpinnerItem>(context, android.R.layout.simple_spinner_item, items) {
+
 
     private var filteredItems: List<SpinnerItem> = items
 
@@ -59,6 +58,7 @@ class CustomSpinnerAdapter(
         filteredItems = newItems
         notifyDataSetChanged()
     }
+
     override fun isEnabled(position: Int): Boolean {
         return if (position == 0) {
             // Disable the first item from Spinner

@@ -115,7 +115,10 @@ class PdfViewerActivityPatched : AppCompatActivity() {
         val typedArray = theme.obtainStyledAttributes(rajatR.styleable.PdfRendererView_toolbar)
         try {
             // Access each attribute and apply it to the respective view
-            val showToolbar = true
+            val showToolbar = typedArray.getBoolean(
+                rajatR.styleable.PdfRendererView_toolbar_pdfView_showToolbar,
+                true
+            )
             val backIcon =
                 typedArray.getDrawable(rajatR.styleable.PdfRendererView_toolbar_pdfView_backIcon)
 
@@ -168,7 +171,7 @@ class PdfViewerActivityPatched : AppCompatActivity() {
         try {
             val backgroundColor = typedArray1.getColor(
                 rajatR.styleable.PdfRendererView_pdfView_backgroundColor,
-                ContextCompat.getColor(applicationContext,android.R.color.white)
+                ContextCompat.getColor(applicationContext,android.R.color.black)
             )
             binding.parentLayout.setBackgroundColor(backgroundColor)
 

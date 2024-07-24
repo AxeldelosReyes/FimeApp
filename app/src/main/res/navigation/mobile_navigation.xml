@@ -35,14 +35,23 @@
             app:destination="@id/material"
             app:popUpTo="@id/temario" />
         <argument
-            android:name="plan"
-            app:argType="integer" />
+            android:name="plan_id"
+            app:argType="string" />
         <argument
-            android:name="academia"
-            app:argType="integer" />
+            android:name="materia_id"
+            app:argType="string" />
         <argument
-            android:name="materia"
-            app:argType="integer" />
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -51,8 +60,23 @@
         android:label="fragment_material"
         tools:layout="@layout/fragment_material">
         <argument
-            android:name="temario"
-            app:argType="integer" />
+            android:name="plan_id"
+            app:argType="string" />
+        <argument
+            android:name="materia_id"
+            app:argType="string" />
+        <argument
+            android:name="academia_id"
+            app:argType="string" />
+        <argument
+            android:name="plan_name"
+            app:argType="string" />
+        <argument
+            android:name="materia_name"
+            app:argType="string" />
+        <argument
+            android:name="academia_name"
+            app:argType="string" />
         <action
             android:id="@+id/action_material_to_youTubePlayerFragment"
             app:destination="@id/youTubePlayerFragment" />
