@@ -118,6 +118,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Plan"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -145,6 +146,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Academia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -188,6 +190,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Materia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -196,10 +199,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="410dp"
+        android:layout_width="500dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_margin="200dp"
+        android:paddingLeft="10dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="3"
@@ -220,6 +224,7 @@
                 android:background="@drawable/shadow_background_icons_green"
                 android:gravity="center"
                 android:text="ADMIN"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -240,18 +245,16 @@
 
             <ImageView
                 android:id="@+id/iconSave"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="55dp"
+                android:layout_marginLeft="50dp"
                 android:src="@drawable/icon_save" />
             <ImageView
                 android:id="@+id/iconDelete"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                app:tint="@color/black"
-                android:layout_marginLeft="0dp"
                 android:src="@drawable/baseline_delete_24" />
 
 
@@ -276,6 +279,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Editar título aquí"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="text|textMultiLine"
             android:textAlignment="center"
             android:textColorHint="#000000" />
@@ -285,6 +289,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Editar texto aquí"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="text|textMultiLine"
             android:minHeight="200dp"
             android:textAlignment="center"
@@ -298,6 +303,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
+            android:fontFamily="@font/roboto_regular"
             android:text="Name" />
 
         <Button
@@ -305,7 +311,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Agregar una imagen" />
+            android:text="Agregar una imagen"
+            android:fontFamily="@font/roboto_medium"/>
 
     </LinearLayout>
 

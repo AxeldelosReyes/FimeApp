@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Description"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="14sp"
                 tools:text="Sample Description" />
         </LinearLayout>

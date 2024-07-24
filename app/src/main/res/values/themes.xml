@@ -9,7 +9,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/black</item>
     </style>
-
     <style name="GreenButton" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/button_green</item>
     </style>

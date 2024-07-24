@@ -7,13 +7,17 @@
     tools:context=".ui.admin.ui.temario.AdminTemario">
 
     <ImageView
-        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/fondo_letras_fime"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:src="@drawable/fondo_letras_fime" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.2"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_vector" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -117,6 +121,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Plan"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -144,6 +149,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Academia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -187,6 +193,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Materia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -195,7 +202,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="650dp"
+        android:layout_width="500dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_margin="200dp"
@@ -208,7 +215,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="250dp"
+            android:paddingRight="200dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -218,6 +226,7 @@
                 android:background="@drawable/shadow_background_icons_green"
                 android:gravity="center"
                 android:text="ADMIN"
+                android:fontFamily="@font/roboto_medium"
                 android:layout_marginStart="-10dp"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -231,8 +240,9 @@
 
             <ImageView
                 android:id="@+id/iconAdd"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/icon_add" />
@@ -249,6 +259,7 @@
         android:layout_marginTop="240dp"
         android:layout_weight="1"
         android:text="Temario"
+        android:fontFamily="@font/roboto_medium"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"

@@ -55,6 +55,7 @@ class favoritos : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        databaseHelper = DBHelper(requireContext())
 
         current_user = Firebase.auth.currentUser
 

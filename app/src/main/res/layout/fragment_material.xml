@@ -120,6 +120,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Plan"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -147,6 +148,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Academia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -190,6 +192,7 @@
                 android:background="@drawable/shadow_background_icons"
                 android:gravity="center"
                 android:text="Materia"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 tools:ignore="NotSibling" />
@@ -204,6 +207,7 @@
         android:layout_marginTop="200dp"
         android:layout_weight="1"
         android:text="Material"
+        android:fontFamily="@font/roboto_medium"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
@@ -225,6 +229,21 @@
         app:layout_constraintEnd_toEndOf="parent" >
 
     </SearchView>
+
+    <TextView
+        android:id="@+id/noFilesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:text="No hay archivos aún"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="#66000000"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDetail"

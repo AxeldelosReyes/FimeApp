@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.rajat.pdfviewer.PdfViewerActivity
 import com.rajat.pdfviewer.util.saveTo
 
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
@@ -33,16 +35,17 @@ class AdminMaterial : Fragment() {
     private lateinit var adapter: DetailAdapter
     private lateinit var items: List<DetailItem>
     private lateinit var searchView: SearchView
+    private lateinit var noFilesText: TextView
 
     private var current_user: FirebaseUser? = null
-    private var plan_id : String = ""
-    private var temario_id : String = ""
-    private var materia_id : String = ""
-    private var academia_id : String = ""
+    private var plan_id: String = ""
+    private var temario_id: String = ""
+    private var materia_id: String = ""
+    private var academia_id: String = ""
 
 
     private var plan_name = ""
-    private var materia_name= ""
+    private var materia_name = ""
     private var academia_name = ""
 
 
@@ -69,10 +72,6 @@ class AdminMaterial : Fragment() {
         academia_name = requireArguments().getString("academia_name").toString()
 
 
-
-
-
-
     }
 
     override fun onCreateView(
@@ -82,10 +81,11 @@ class AdminMaterial : Fragment() {
         val view = inflater.inflate(R.layout.fragment_material_admin, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewDetail)
         searchView = view.findViewById(R.id.searchViewMaterial)
+        noFilesText = view.findViewById(R.id.noFilesText)
 
         val iconAdd = view.findViewById<ImageView>(R.id.iconAdd)
 
-        iconAdd.setOnClickListener{
+        iconAdd.setOnClickListener {
             val bundle = Bundle().apply {
                 putString("temario_id", temario_id)
                 putString("plan_id", plan_id)
@@ -112,6 +112,7 @@ class AdminMaterial : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val plan_text = view.findViewById<TextView>(R.id.textViewPlan)
         val materia_text = view.findViewById<TextView>(R.id.textViewMateria)
@@ -141,7 +142,7 @@ class AdminMaterial : Fragment() {
             }
         }, { item ->
             // Handle toggle favorite
-           this.toggleFavorite(item)
+            this.toggleFavorite(item)
         })
         recyclerView.adapter = adapter
 
@@ -222,15 +223,13 @@ class AdminMaterial : Fragment() {
 
 
     private fun fetch_from_firebase_database(table: String) {
-
-
         val database = Firebase.firestore
         val results = mutableListOf<Map<String, Any?>>()
 
         when (table) {
             "material" -> {
                 database.collection("material")
-                    .whereEqualTo("temario_id",database.collection("temario").document(temario_id))
+                    .whereEqualTo("temario_id", database.collection("temario").document(temario_id))
                     .orderBy("name")
                     .get()
                     .addOnSuccessListener { result ->
@@ -244,36 +243,35 @@ class AdminMaterial : Fragment() {
                             )
                             results.add(data)
                         }
-                        val new_list = results.toMyItemList()
 
-                        new_list.forEach { item ->
-                            database.collection("favoritos")
-                                .whereEqualTo("material_id",  database.collection("material").document(item.id))
-                                .whereEqualTo("uuid", current_user?.uid)
-                                .get()
-                                .addOnSuccessListener { doc ->
-                                    item.like = doc.size() > 0
-                                    adapter.updateItems( new_list )
-                                    items = new_list
-                                }
-                                .addOnFailureListener { exception ->
-                                    item.like = false
-                                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                                }
+                        if (results.isEmpty()) {
+                            noFilesText.visibility = View.VISIBLE
+                        } else {
+                            noFilesText.visibility = View.GONE
+                            val new_list = results.toMyItemList()
+
+                            new_list.forEach { item ->
+                                database.collection("favoritos")
+                                    .whereEqualTo("material_id", database.collection("material").document(item.id))
+                                    .whereEqualTo("uuid", current_user?.uid)
+                                    .get()
+                                    .addOnSuccessListener { doc ->
+                                        item.like = doc.size() > 0
+                                        adapter.updateItems(new_list)
+                                        items = new_list
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        item.like = false
+                                        Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                                    }
+                            }
                         }
-
-
-
-
-                    }.addOnFailureListener { exception ->
+                    }
+                    .addOnFailureListener { exception ->
                         Log.w("FIREBASE", "Error getting documents: ", exception)
                     }
             }
         }
-
-
     }
-
-
 
 }
