@@ -1,5 +1,8 @@
 package com.example.fimeapp.ui.admin.ui.temario
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
@@ -7,22 +10,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.fimeapp.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.FirebaseStorage
 
 class AddTemario : Fragment() {
 
     companion object {
         fun newInstance() = AddTemario()
     }
-
+    private var imageUri: Uri? = null
+    private var downloadUri: String? = null
     private var plan_id : String = ""
     private var temario_id : String = ""
     private var materia_id : String = ""
@@ -36,6 +44,15 @@ class AddTemario : Fragment() {
     private var nombre : TextInputEditText? = null
     private var descripcion : TextInputEditText? = null
     private var urlInput : EditText? = null
+
+    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            imageUri = result.data?.data
+            imageUri?.let { uri ->
+                uploadImageToFirebase(uri)
+            }
+        }
+    }
 
     private val viewModel: AddTemarioViewModel by viewModels()
 
@@ -72,6 +89,10 @@ class AddTemario : Fragment() {
 
         fetch_from_firebase_database("temario")
 
+        // Configurar el botón para seleccionar una imagen
+        view.findViewById<Button>(R.id.select_image_button).setOnClickListener {
+            selectImageFromGallery()
+        }
 
         view.findViewById<AppCompatImageView>(R.id.iconSave).setOnClickListener {
 
@@ -131,6 +152,42 @@ class AddTemario : Fragment() {
         }
 
 
+    }
+
+    private fun selectImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+        }
+        selectImageLauncher.launch(intent)
+    }
+
+    private fun uploadImageToFirebase(uri: Uri) {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val imagesRef = storageRef.child("images/${uri.lastPathSegment}")
+        val uploadTask = imagesRef.putFile(uri)
+
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let { throw it }
+            }
+            imagesRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                downloadUri = task.result.toString()
+
+//                this.urlInput.text = downloadUri.toString()
+                saveImageUrlToDatabase(downloadUri.toString())
+                urlInput?.setText(downloadUri.toString())
+            } else {
+                // Handle failures
+            }
+        }
+    }
+
+    private fun saveImageUrlToDatabase(imageUrl: String) {
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("images")
+        myRef.push().setValue(imageUrl)
     }
 
     private fun savetoFirebase(vals : HashMap<String, Any>) {
