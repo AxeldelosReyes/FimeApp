@@ -33,3 +33,59 @@ Sigue estos pasos para agregar el archivo `google-services.json` a tu proyecto d
 
 ¡Y listo! Tu archivo `google-services.json` está configurado.
 
+
+
+
+4. Reglas de firebase firestore.
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+		
+    
+     match /academias/{academiaId} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null && (isUserAdminAuthorized());
+    }
+    match /favoritos/{favId} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null
+    }
+    match /study_plan/{studyId} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null && (isUserAdminAuthorized());
+    }
+    match /material/{materialId} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null && (isUserAdminAuthorized());
+    }
+    
+    match /temario/{temarioID} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null && (isUserAdminAuthorized());
+    }
+    
+    
+    match /usuarios/{userId} {
+      allow read, write ,create, delete : if request.auth != null && request.auth.uid == userId || isUserAdminAuthorized();
+    }
+    
+    match /users/{userId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    match /materias/{materiaId} {
+      allow read: if request.auth != null
+      allow write ,create, delete : if request.auth != null && (isUserAdminAuthorized());
+    }
+    
+     match /administradores/{adminID} {
+      allow read, write ,create, delete: if request.auth != null && (isUserAdminAuthorized());
+    }
+    
+    function isUserAdminAuthorized() {
+      return get(/databases/$(database)/documents/administradores/$(request.auth.uid)).id != null
+    }
+   
+  }
+}
